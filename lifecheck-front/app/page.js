@@ -1,5 +1,5 @@
 import Image from "next/image";
-import HeroSection from "@/components/heroSection";
+import HeroSection from "@/components/HeroSection";
 import {
   ClipboardDocumentCheckIcon,
   MicrophoneIcon,
@@ -66,10 +66,11 @@ export default function Home() {
                   <PresentationChartBarIcon className="h-20 w-20 text-[#23A28B] p-4 group-hover:text-white transition duration 1000" />{" "}
                 </div>
                 <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3 group-hover:text-white transition duration 1000">
-                Guarda tus resultados 
+                  Guarda tus resultados
                 </h1>
                 <p className="leading-relaxed mb-3 group-hover:text-white transition duration 1000">
-                  Cada encuesta que termines será guardada para futuras consultas.
+                  Cada encuesta que termines será guardada para futuras
+                  consultas.
                 </p>
               </div>
             </div>
