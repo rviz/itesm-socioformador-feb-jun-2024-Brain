@@ -17,7 +17,7 @@ const menuItems = {
     subcategories: [],
   },
   Cuenta: {
-    href: "/Cuenta",
+    href: "/account",
     subcategories: [],
   },
 };
