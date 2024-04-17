@@ -3,28 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Menu } from "@headlessui/react";
 import Link from "next/link";
 
-const menuItems = {
-  Evaluación: {
-    href: "#",
-    subcategories: [],
-  },
-  Licencias: {
-    href: "",
-    subcategories: [],
-  },
-  Recursos: {
-    href: "#",
-    subcategories: [],
-  },
-  Cuenta: {
-    href: "/account",
-    subcategories: [],
-  },
-};
-
 export default function Header() {
   const [scrolling, setScrolling] = useState(false);
-  const [isSearchVisible, setIsSearchVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,39 +22,39 @@ export default function Header() {
     };
   }, []);
 
-  const toggleSearchVisibility = () => {
-    setIsSearchVisible(!isSearchVisible); // Cambia la visibilidad del componente de búsqueda
-  };
   return (
-    <div
-      className={`${
-        scrolling ? "bg-[#0C1B2A]" : "bg-white from-black/50"
-      } fixed top-0 z-30 w-full duration-500 transition-all`}
-    >
-      <header
-        className={`relative w-full uppercase text-[15px] ${
-          scrolling ? "bg-[#F3F2F1] text-[#0C1B2A]" : "text-white"
-        } transition-colors duration-500`}
-      >
+    <div className={`${scrolling ? "bg-[#0C1B2A]" : "bg-white from-black/50"} fixed top-0 z-30 w-full duration-500 transition-all`}>
+      <header className={`relative w-full uppercase text-[15px] ${scrolling ? "bg-[#F3F2F1] text-[#0C1B2A]" : "text-white"} transition-colors duration-500`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" passHref>
-            <div className="text-left text-black">Brain</div>
-          </Link>
+          <Link href="/" className="text-left text-black cursor-pointer">Brain</Link>
 
           <div className="items-center space-x-24 py-3 hidden uppercase md:flex">
-            {Object.keys(menuItems).map((category) => (
-              <Menu
-                as="div"
-                className="text-l text-black font-normal uppercase"
-                key={category}
-              >
-                <Menu.Button>{category}</Menu.Button>
-              </Menu>
-            ))}
+            <Menu as="div" className="text-l text-black font-normal uppercase" key="Evaluación">
+              <Menu.Button as={Link} href="/evaluation">
+                Evaluación
+              </Menu.Button>
+            </Menu>
+            <Menu as="div" className="text-l text-black font-normal uppercase" key="Licencias">
+              <Menu.Button as={Link} href="/licenses">
+                Licencias
+              </Menu.Button>
+            </Menu>
+            <Menu as="div" className="text-l text-black font-normal uppercase" key="Recursos">
+              <Menu.Button as={Link} href="/resources">
+                Recursos
+              </Menu.Button>
+            </Menu>
+            <Menu as="div" className="text-l text-black font-normal uppercase" key="Cuenta">
+              <Menu.Button as={Link} href="/account">
+                Cuenta
+              </Menu.Button>
+            </Menu>
           </div>
 
           <div className="flex items-center space-x-4">
-            <Link href={"/create"}></Link>
+            <Link href="/create" className="cursor-pointer">
+              Link Placeholder
+            </Link>
           </div>
         </div>
       </header>
