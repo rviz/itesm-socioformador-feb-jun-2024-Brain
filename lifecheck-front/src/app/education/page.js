@@ -16,16 +16,6 @@ export default function Evaluation() {
               </h1>
             </div>
           </Link>
-          <Link href="/health" className="block focus:outline-none w-full">
-            <div className="p-4 group h-full shadow-md bg-white bg-opacity-75 px-8 pt-16 pb-12 rounded-lg overflow-hidden text-center relative hover:bg-pink-500 transition duration-200">
-              <div className="flex justify-center items-center">
-                <HeartIcon className="h-20 w-20 text-pink-500 p-4 group-hover:text-white transition duration-200" />
-              </div>
-              <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3 group-hover:text-white transition duration-200">
-                Salud
-              </h1>
-            </div>
-          </Link>
         </div>
       </div>
     </section>

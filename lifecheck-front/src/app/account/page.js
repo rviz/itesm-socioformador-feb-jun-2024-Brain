@@ -5,11 +5,8 @@ export default function Page() {
   return (
     <div className="relative w-full aspect-[10/4]">
       <div className="absolute inset-0 bg-black bg-opacity-60 flex justify-left items-left">
-        <h2>Page</h2>
         <div className="text-left text-white">
-          <h2 className="text-4xl w-1/2 uppercase font-normal pl-5 pt-44">
-            Page
-          </h2>
+          <h2 className="text-4xl w-1/2 uppercase font-normal pl-5">Page</h2>
           {/* <h2 className="text-4xl w-1/2 uppercase font-normal pl-5 pt-44">
             Mejora el bienestar de tu organización
           </h2>

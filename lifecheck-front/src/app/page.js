@@ -15,7 +15,7 @@ export default function Home() {
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap -m-4">
             <div className="p-4 lg:w-1/4">
-              <div className="group h-full bg-white bg-opacity-75 px-8 pt-16 pb-12 rounded-lg overflow-hidden text-center relative hover:bg-[#23A28B] transition duration 1000">
+              <div className="group h-full shadow-md bg-white bg-opacity-75 px-8 pt-16 pb-12 rounded-lg overflow-hidden text-center relative hover:bg-[#23A28B] transition duration 1000">
                 <div className="flex justify-center items-center">
                   {" "}
                   <ClipboardDocumentCheckIcon className="h-20 w-20 text-[#23A28B] p-4 group-hover:text-white transition duration 1000" />{" "}
@@ -30,7 +30,7 @@ export default function Home() {
               </div>
             </div>
             <div className="p-4 lg:w-1/4">
-              <div className="group h-full bg-white bg-opacity-75 px-8 pt-16 pb-12 rounded-lg overflow-hidden text-center relative hover:bg-[#23A28B] transition duration 1000">
+              <div className="group h-full shadow-md bg-white bg-opacity-75 px-8 pt-16 pb-12 rounded-lg overflow-hidden text-center relative hover:bg-[#23A28B] transition duration 1000">
                 <div className="flex justify-center items-center">
                   {" "}
                   <MicrophoneIcon className="h-20 w-20 text-[#23A28B] p-4 group-hover:text-white transition duration 1000" />{" "}
@@ -45,7 +45,7 @@ export default function Home() {
               </div>
             </div>
             <div className="p-4 lg:w-1/4">
-              <div className="group h-full bg-white bg-opacity-75 px-8 pt-16 pb-12 rounded-lg overflow-hidden text-center relative hover:bg-[#23A28B] transition duration 1000">
+              <div className="group h-full shadow-md bg-white bg-opacity-75 px-8 pt-16 pb-12 rounded-lg overflow-hidden text-center relative hover:bg-[#23A28B] transition duration 1000">
                 <div className="flex justify-center items-center">
                   {" "}
                   <SparklesIcon className="h-20 w-20 text-[#23A28B] p-4 group-hover:text-white transition duration 1000" />{" "}
@@ -60,7 +60,7 @@ export default function Home() {
               </div>
             </div>
             <div className="p-4 lg:w-1/4">
-              <div className="group h-full bg-white bg-opacity-75 px-8 pt-16 pb-12 rounded-lg overflow-hidden text-center relative hover:bg-[#23A28B] transition duration 1000">
+              <div className="group h-full shadow-md bg-white bg-opacity-75 px-8 pt-16 pb-12 rounded-lg overflow-hidden text-center relative hover:bg-[#23A28B] transition duration 1000">
                 <div className="flex justify-center items-center">
                   {" "}
                   <PresentationChartBarIcon className="h-20 w-20 text-[#23A28B] p-4 group-hover:text-white transition duration 1000" />{" "}
