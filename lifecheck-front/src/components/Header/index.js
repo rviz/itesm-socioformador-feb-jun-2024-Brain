@@ -81,11 +81,6 @@ export default function Header() {
                 Recursos
               </Menu.Button>
             </Menu>
-            <Menu as="div" className="text-l text-black font-normal uppercase" key="Cuenta">
-              <Menu.Button as={Link} href="/account">
-                Cuenta
-              </Menu.Button>
-            </Menu>
             <Menu as="div" className="text-l text-black font-normal uppercase" key="Speech">
               <Menu.Button as={Link} href="/speech">
                 SpeechToText
