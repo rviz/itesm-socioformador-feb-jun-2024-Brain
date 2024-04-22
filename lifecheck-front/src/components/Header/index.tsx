@@ -81,6 +81,17 @@ export default function Header() {
                 Recursos
               </Menu.Button>
             </Menu>
+            <Menu as="div" className="text-l text-black font-normal uppercase" key="Speech">
+              <Menu.Button as={Link} href="/speech">
+                SpeechToText
+              </Menu.Button>
+            </Menu>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <Link href="/create" className="cursor-pointer">
+              Link Placeholder
+            </Link>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
