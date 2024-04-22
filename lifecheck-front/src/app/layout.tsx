@@ -3,7 +3,7 @@ import "../css/style.css";
 import Header from "../components/Header";
 import Header2 from "../components/Header2";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils/cn";
 
 const inter = Inter({ subsets: ["latin"] });
 
