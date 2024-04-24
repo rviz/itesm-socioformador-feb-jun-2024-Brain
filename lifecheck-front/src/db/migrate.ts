@@ -1,10 +1,10 @@
 import 'dotenv/config';
-import { migrate } from 'drizzle-orm/mysql2/migrator';
-import { db, connection } from './db';
-import { drizzle } from 'drizzle-orm/node-postgres';
+import { migrate } from 'drizzle-orm/node-postgres/migrator';
+import { pool, db } from './db'; // Ensure this path matches where your db.ts file is located
 
 // This will run migrations on the database, skipping the ones already applied
-await migrate(db, { migrationsFolder: './drizzle' });
-
-// Don't forget to close the connection, otherwise the script will hang
-await connection.end();
+(async () => {
+  await migrate(db, { migrationsFolder: './drizzle' });
+  // Don't forget to close the pool, otherwise the script will hang
+  await pool.end();
+})();
