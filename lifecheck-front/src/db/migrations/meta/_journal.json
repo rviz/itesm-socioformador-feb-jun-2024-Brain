@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1713985256927,
+      "tag": "0000_condemned_paibok",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1713985692671,
+      "tag": "0001_mighty_bloodstorm",
+      "breakpoints": true
+    }
+  ]
+}

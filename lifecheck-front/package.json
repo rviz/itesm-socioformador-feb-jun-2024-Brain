@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "drizzle-kit generate:pg --schema ./src/db/schema --output ./src/db/migrations"
+    "db:generate": "drizzle-kit generate:pg --schema ./src/db/schema --out=./src/db/migrations",
+    "db:migrate": "npm run ./src/db/migrate.ts"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.5.0",
