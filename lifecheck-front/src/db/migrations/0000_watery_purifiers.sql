@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS "category" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "company" (
 	"company_id" serial PRIMARY KEY NOT NULL,
-	"c_name" text NOT NULL,
+	"c_name" varchar(256) NOT NULL,
 	"description" text NOT NULL,
 	"sector" text NOT NULL,
 	"evaluation_timer" integer,
@@ -49,19 +49,19 @@ CREATE TABLE IF NOT EXISTS "evaluation_user" (
 	"created_by" varchar
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "question_option" (
+	"question_option_id" serial PRIMARY KEY NOT NULL,
+	"qop_text" text NOT NULL,
+	"question_id" integer,
+	"created_at" timestamp DEFAULT current_timestamp,
+	"created_by" varchar
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "question" (
 	"question_id" serial PRIMARY KEY NOT NULL,
 	"q_text" varchar NOT NULL,
 	"q_type" boolean NOT NULL,
 	"category_id" integer,
-	"created_at" timestamp DEFAULT current_timestamp,
-	"created_by" varchar
-);
---> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "question_option" (
-	"question_option_id" serial PRIMARY KEY NOT NULL,
-	"qop_text" text NOT NULL,
-	"question_id" integer,
 	"created_at" timestamp DEFAULT current_timestamp,
 	"created_by" varchar
 );
@@ -140,13 +140,13 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "question" ADD CONSTRAINT "question_category_id_category_category_id_fk" FOREIGN KEY ("category_id") REFERENCES "category"("category_id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "question_option" ADD CONSTRAINT "question_option_question_id_question_question_id_fk" FOREIGN KEY ("question_id") REFERENCES "question"("question_id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "question_option" ADD CONSTRAINT "question_option_question_id_question_question_id_fk" FOREIGN KEY ("question_id") REFERENCES "question"("question_id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "question" ADD CONSTRAINT "question_category_id_category_category_id_fk" FOREIGN KEY ("category_id") REFERENCES "category"("category_id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

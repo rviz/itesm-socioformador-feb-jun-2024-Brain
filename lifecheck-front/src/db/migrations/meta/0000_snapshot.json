@@ -1,5 +1,5 @@
 {
-  "id": "7a9c48e7-b3fa-47bc-a248-9c3fd76b0fae",
+  "id": "14dbd385-5006-4703-8841-e651ed36e239",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -114,7 +114,7 @@
         },
         "c_name": {
           "name": "c_name",
-          "type": "text",
+          "type": "varchar(256)",
           "primaryKey": false,
           "notNull": true
         },
@@ -338,6 +338,61 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
+    "question_option": {
+      "name": "question_option",
+      "schema": "",
+      "columns": {
+        "question_option_id": {
+          "name": "question_option_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "qop_text": {
+          "name": "qop_text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "question_id": {
+          "name": "question_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "current_timestamp"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "question_option_question_id_question_question_id_fk": {
+          "name": "question_option_question_id_question_question_id_fk",
+          "tableFrom": "question_option",
+          "tableTo": "question",
+          "columnsFrom": [
+            "question_id"
+          ],
+          "columnsTo": [
+            "question_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "question": {
       "name": "question",
       "schema": "",
@@ -391,61 +446,6 @@
           ],
           "columnsTo": [
             "category_id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "question_option": {
-      "name": "question_option",
-      "schema": "",
-      "columns": {
-        "question_option_id": {
-          "name": "question_option_id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "qop_text": {
-          "name": "qop_text",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "question_id": {
-          "name": "question_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "current_timestamp"
-        },
-        "created_by": {
-          "name": "created_by",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "question_option_question_id_question_question_id_fk": {
-          "name": "question_option_question_id_question_question_id_fk",
-          "tableFrom": "question_option",
-          "tableTo": "question",
-          "columnsFrom": [
-            "question_id"
-          ],
-          "columnsTo": [
-            "question_id"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
