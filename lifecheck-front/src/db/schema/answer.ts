@@ -7,5 +7,5 @@ export const answer = pgTable('answer', {
     aText: text('a_text').notNull(), // 'text' type used for potentially long text entries
     questionId: integer('question_id').references(() => question.questionId),
     createdAt: timestamp('created_at').default(sql`current_timestamp`),
-    createdBy: varchar('created_by')
+    createdBy: varchar('created_by'),
 });
