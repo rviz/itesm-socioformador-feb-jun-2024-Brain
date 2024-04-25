@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "db:generate": "drizzle-kit generate:pg --schema ./src/db/schema --out=./src/db/migrations",
-    "db:migrate": "npm run ./src/db/migrate.ts"
+    "db:migrate": "pnpm tsx src/db/migrate.ts"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.5.0",
@@ -23,6 +23,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.9",
     "framer-motion": "^11.1.5",
     "lucide-react": "^0.370.0",
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
+    "@types/pg": "^8.11.5",
     "@types/react": "18.2.79",
     "autoprefixer": "^10.0.1",
     "drizzle-kit": "^0.20.17",
@@ -45,6 +47,7 @@
     "eslint-config-next": "14.1.4",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
 }

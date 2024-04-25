@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
 import { pool, db } from './db'; // Ensure this path matches where your db.ts file is located
 
