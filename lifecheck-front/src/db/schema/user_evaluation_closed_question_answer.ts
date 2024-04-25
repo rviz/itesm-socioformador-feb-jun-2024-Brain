@@ -5,10 +5,10 @@ import { question } from './question'; // Ensure this import points to where the
 import { question_option } from './question_option'; // Ensure this import points to where the question_option schema is defined
 
 export const user_evaluation_closed_question_answer = pgTable('user_evaluation_closed_question_answer', {
-    user_evaluation_closed_question_answer_id: serial('user_evaluation_closed_question_answer_id').primaryKey(),
-    user_id: integer('user_id').notNull().references(() => users.user_id),
-    question_id: integer('question_id').notNull().references(() => question.question_id),
-    question_option_id: integer('question_option_id').notNull().references(() => question_option.question_option_id),
-    created_at: timestamp('created_at').default(sql`current_timestamp`),
-    created_by: varchar('created_by')
+    userEvaluationClosedQuestionAnswerId: serial('user_evaluation_closed_question_answer_id').primaryKey(),
+    userId: integer('user_id').notNull().references(() => users.userId),
+    questionId: integer('question_id').notNull().references(() => question.questionId),
+    questionOptionId: integer('question_option_id').notNull().references(() => question_option.questionOptionId),
+    createdAt: timestamp('created_at').default(sql`current_timestamp`),
+    createdBy: varchar('created_by')
 });

@@ -1,16 +1,14 @@
-import { drizzle } from 'drizzle-orm/aws-data-api/pg';
-import { RDSDataClient } from '@aws-sdk/client-rds-data';
-import { fromIni } from '@aws-sdk/credential-providers';
+import { pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Client } from "pg";
 
-const rdsClient = new RDSDataClient({
-    credentials: fromIni({ profile: process.env['PROFILE'] }),
-    region: 'us-east-2c',
+const client = new Client({
+  host: process.env.DATABASE,
+  port: parseInt(process.env.DB_PORT),
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_PROFILE,
 });
 
-const db = drizzle(rdsClient, {
-  database: process.env['DATABASE']!,
-  secretArn: process.env['SECRET_ARN']!,
-  resourceArn: process.env['RESOURCE_ARN']!,
-});
-
-// await db.select().from(...)...;
+await client.connect();
+const db = drizzle(client);

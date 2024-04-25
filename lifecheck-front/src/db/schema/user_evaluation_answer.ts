@@ -5,10 +5,10 @@ import { question } from './question'; // Ensure this import points to where the
 import { answer } from './answer'; // Ensure this import points to where the answer schema is defined
 
 export const user_evaluation_answer = pgTable('user_evaluation_answer', {
-    user_evaluation_answer_id: serial('user_evaluation_answer_id').primaryKey(),
-    evaluation_user_id: integer('evaluation_user_id').notNull().references(() => evaluation_user.evaluation_user_id),
-    question_id: integer('question_id').notNull().references(() => question.question_id),
-    answer_id: integer('answer_id').notNull().references(() => answer.answer_id),
-    created_at: timestamp('created_at').default(sql`current_timestamp`),
-    created_by: varchar('created_by')
+    userEvaluationAnswerId: serial('user_evaluation_answer_id').primaryKey(),
+    evaluationUserId: integer('evaluation_user_id').notNull().references(() => evaluation_user.evaluationUserId),
+    questionId: integer('question_id').notNull().references(() => question.questionId),
+    answerId: integer('answer_id').notNull().references(() => answer.answerId),
+    createdAt: timestamp('created_at').default(sql`current_timestamp`),
+    createdBy: varchar('created_by')
 });

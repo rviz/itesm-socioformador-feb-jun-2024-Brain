@@ -4,9 +4,9 @@ import { evaluation } from './evaluation'; // Ensure this import points to where
 import { question } from './question'; // Ensure this import points to where the question schema is defined
 
 export const evaluation_question = pgTable('evaluation_question', {
-    evaluation_question_id: serial('evaluation_question_id').primaryKey(),
-    evaluation_id: integer('evaluation_id').notNull().references(() => evaluation.evaluation_id),
-    question_id: integer('question_id').notNull().references(() => question.question_id),
-    created_at: timestamp('created_at').default(sql`current_timestamp`),
-    created_by: varchar('created_by')
+    evaluationQuestionId: serial('evaluation_question_id').primaryKey(),
+    evaluationId: integer('evaluation_id').notNull().references(() => evaluation.evaluationId),
+    questionId: integer('question_id').notNull().references(() => question.questionId),
+    createdAt: timestamp('created_at').default(sql`current_timestamp`),
+    createdBy: varchar('created_by')
 });
