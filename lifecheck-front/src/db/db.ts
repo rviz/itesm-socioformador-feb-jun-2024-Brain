@@ -20,5 +20,4 @@ export const pool = new Pool({
   // If you need to execute multiple statements at once, consider running them as separate queries or using a transaction.
 });
 
-pool.connect();
 export const db = drizzle(pool, { schema });
