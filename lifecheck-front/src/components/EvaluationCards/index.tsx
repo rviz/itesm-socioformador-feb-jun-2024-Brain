@@ -16,18 +16,19 @@ import {
 
 export default function EvaluationCards() {
   return (
-    <div className="container mx-auto px-4 py-12 md:py-16 lg:py-10">
-      <p className="text-2xl pb-12 text-center underline underline-offset-8">Seleccione una categoría</p>
+    <div className="h-screen container mx-auto px-4 py-12 md:py-16 lg:py-10">
+      <p className="text-2xl pb-12 text-center underline underline-offset-8">
+        Seleccione una categoría
+      </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-8">
- 
-          <Card className="relative group">
-            <CardContent className="flex flex-col items-center justify-center h-full p-6 md:p-8 lg:p-24 bg-stone-200 rounded-lg transition-colors group-hover:bg-stone-200 ">
-              <div className="flex items-center justify-center w-16 h-16 rounded-full text-white mb-4 group-hover:text-yellow-500">
-                <HomeIcon className="text-stone-500 group-hover:text-stone-500" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Vivienda</h3>
-              <div className="absolute top-4 right-4 flex items-center space-x-2">
-                {/* <Button
+        <Card className="relative group ">
+          <CardContent className="flex flex-col items-center justify-center h-full p-6 md:p-8 lg:p-24 bg-stone-200 rounded-lg transition-colors group-hover:bg-stone-200 ">
+            <div className="flex items-center justify-center w-16 h-16 rounded-full text-white mb-4 group-hover:text-yellow-500">
+              <HomeIcon className="text-stone-500 group-hover:text-stone-500" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Vivienda</h3>
+            <div className="absolute top-4 right-4 flex items-center space-x-2">
+              {/* <Button
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50"
                 size="icon"
                 variant="ghost"
@@ -35,21 +36,20 @@ export default function EvaluationCards() {
                 <CheckIcon className="w-5 h-5" />
                 <span className="sr-only">Mark as completed</span>
               </Button> */}
-              </div>
-            </CardContent>
-          </Card>
-        
+            </div>
+          </CardContent>
+        </Card>
 
-          <Card className="relative group">
-            <CardContent className="flex flex-col items-center justify-center h-full p-6 md:p-8 lg:p-20 bg-stone-200 rounded-lg transition-colors group-hover:bg-stone-200 ">
-              <div className="flex items-center justify-center w-16 h-16 rounded-full text-white mb-4 group-hover:text-yellow-500">
-                <FaceSmileIcon className="text-stone-500 group-hover:text-stone-500" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-center">
-                Satisfacción de vida
-              </h3>
-              <div className="absolute top-4 right-4 flex items-center space-x-2">
-                {/* <Button
+        <Card className="relative group">
+          <CardContent className="flex flex-col items-center justify-center h-full p-6 md:p-8 lg:p-20 bg-stone-200 rounded-lg transition-colors group-hover:bg-stone-200 ">
+            <div className="flex items-center justify-center w-16 h-16 rounded-full text-white mb-4 group-hover:text-yellow-500">
+              <FaceSmileIcon className="text-stone-500 group-hover:text-stone-500" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-center">
+              Satisfacción de vida
+            </h3>
+            <div className="absolute top-4 right-4 flex items-center space-x-2">
+              {/* <Button
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50"
                 size="icon"
                 variant="ghost"
@@ -57,9 +57,9 @@ export default function EvaluationCards() {
                 <CheckIcon className="w-5 h-5" />
                 <span className="sr-only">Mark as completed</span>
               </Button> */}
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          </CardContent>
+        </Card>
 
         <Link href="/category/id" passHref>
           <Card className="relative group transition-transform duration-200 ease-in-out transform hover:-translate-y-3 hover:shadow-lg">
@@ -178,4 +178,3 @@ export default function EvaluationCards() {
     </div>
   );
 }
-
