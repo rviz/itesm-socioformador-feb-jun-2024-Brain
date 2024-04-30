@@ -6,6 +6,12 @@ export default function Evaluation() {
   return (
     <div className="flex flex-col space-y-4">
       <EvaluationCards />
+      <Link
+        href="/evaluation/education"
+        className="block focus:outline-none w-full"
+      >
+        <button>Hola</button>
+      </Link>
     </div>
     // <section className="text-gray-600 body-font">
     //   <div className="container max-w-7xl px-5 py-24 mx-auto">
