@@ -1,5 +1,5 @@
 import Image from "next/image";
-import HeroSection from "../components/HeroSection";
+import HeroSection from "@/src/components/HeroSection";
 import {
   ClipboardDocumentCheckIcon,
   MicrophoneIcon,
@@ -10,9 +10,10 @@ import {
 export default function Home() {
   return (
     <div>
+      {/* Aqui entraria una funcion que si no ha realizado encuesta, muestra HeroSection, y una vez realizada una eval completa, desplega las stats */}
       <HeroSection />
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 pb-24 mx-auto">
           <div className="flex flex-wrap -m-4">
             <div className="p-4 lg:w-1/4">
               <div className="group h-full shadow-md bg-white bg-opacity-75 px-8 pt-16 pb-12 rounded-lg overflow-hidden text-center relative hover:bg-[#23A28B] transition duration 1000">

@@ -1,30 +1,16 @@
-import Link from "next/link";
-import Image from "next/image";
+"use client";
 import React from "react";
+import { WavyBackground } from "@/src/components/ui/wavy-background";
 
 export default function HeroSection() {
   return (
-    <div className="relative w-full aspect-[10/4]">
-      <Image src={"/HeroSection.jpg"} fill className="object-cover" alt={""} />
-      <div className="absolute inset-0 bg-black bg-opacity-60 flex justify-center items-center">
-        <div className="text-center text-white px-4 py-8">
-          <h2 className="text-4xl uppercase font-normal max-w-2xl mx-auto pt-24">
-            Mejora el bienestar de tu organización
-          </h2>
-          <h3 className="text-xs mt-3 mb-3 max-w-md mx-auto">
-            Para una mejor colaboración, hay que contar con una buena calidad de
-            vida. Con una evaluación que diagnosticará y retroalimentará tus
-            áreas de crecimiento personal.
-          </h3>
-          <div className="mt-8">
-            <button className="text-white font-semibold border-solid rounded-lg border-2 px-24 py-2 tracking-wide text-[10px] hover:bg-[#23A28B]">
-              Iniciar evaluación
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <WavyBackground className="max-w-4xl mx-auto pb-40">
+      <p className="text-2xl md:text-4xl lg:text-6xl text-black font-bold inter-var text-center">
+        Descubre y mejora tu calidad de vida con nuestro análisis
+      </p>
+      <p className="text-base md:text-lg mt-4 text-black font-normal inter-var text-center pt-5">
+        Responde las diferentes categorias para analizar tu calidad de vida
+      </p>
+    </WavyBackground>
   );
 }
-
-// export default HeroSection;

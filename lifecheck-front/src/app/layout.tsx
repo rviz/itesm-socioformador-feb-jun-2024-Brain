@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Header2 from "../components/Header2";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { cn } from "../lib/utils/cn";
+import Footer from "../components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,8 +23,9 @@ export default function RootLayout({ children }) {
         )}
       >
         <UserProvider>
-          <Header />
+          <Header2 />
           <div className="pt-20">{children}</div>
+          <Footer />
         </UserProvider>
       </body>
     </html>

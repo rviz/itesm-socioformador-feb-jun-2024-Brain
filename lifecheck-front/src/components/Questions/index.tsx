@@ -1,6 +1,6 @@
-'use client'
-import "babel-polyfill";
-import 'regenerator-runtime/runtime';
+"use client";
+import "@babel/polyfill";
+import "regenerator-runtime/runtime";
 
 import React from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';

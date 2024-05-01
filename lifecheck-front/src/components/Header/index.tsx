@@ -88,7 +88,6 @@ export default function Header() {
             </Menu>
           </div>
 
-          
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -122,4 +121,3 @@ export default function Header() {
     </div>
   );
 }
-
