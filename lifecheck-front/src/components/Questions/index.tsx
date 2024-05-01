@@ -19,7 +19,8 @@ import {
 import { Play } from "next/font/google";
 import { kMaxLength } from "buffer";
 
-import Question from './Question';
+import Question from '.';
+import { useState } from 'react';
 
 interface TallerPost {
   pregunta: string,
@@ -34,9 +35,29 @@ const MyComponent: React.FC<TallerPost> = ({ pregunta, descripcion }) => {
         resetTranscript,
         browserSupportsSpeechRecognition
       } = useSpeechRecognition();
+
     
       // Estado para controlar si el reconocimiento está activo
       const [isListening, setIsListening] = React.useState(false);
+  
+      const [savedInput, setSavedInput] = useState("");
+      const [savedTranscript, setSavedTranscript] = useState("");
+
+    React.useEffect(() => {
+      if (isListening) {
+        setSavedTranscript(transcript);
+      }
+    }, [transcript, isListening]);
+
+    const handleInputChange = (event) => {
+      setSavedTranscript(event.target.value);
+      if (isListening) {
+        // Opcional: Detén el reconocimiento de voz si el usuario comienza a escribir
+        SpeechRecognition.stopListening();
+        setIsListening(false);
+      }
+    };
+
     
       if (!browserSupportsSpeechRecognition) {
         return <span>Browser doesn't support speech recognition.</span>;
@@ -50,6 +71,7 @@ const MyComponent: React.FC<TallerPost> = ({ pregunta, descripcion }) => {
     //         outline-2 outline focus:outline-black
       // Detiene la escucha y actualiza el estado
       const stopListening = () => {
+        setSavedInput(savedTranscript);
         SpeechRecognition.stopListening();
         setIsListening(false); // No se está escuchando
       };
@@ -61,10 +83,11 @@ const MyComponent: React.FC<TallerPost> = ({ pregunta, descripcion }) => {
           {/*<button onClick={SpeechRecognition.stopListening}>Stop</button>*/}
           {/*<button onClick={resetTranscript}>Reset</button>*/}
     
-          <div className="flex min-h-screen flex-col items-center pt-5">
-        <Image src="/EvaluationGreenBar.png" alt="GOL" fill className="object-scale-down object-top drop-shadow-2xl">
-          </Image>
-          <div className="flex justify-center items-center pb-10 relative">
+          <div className="flex flex-col items-center justify-between mb-32">
+      <div className="bg-contain w-screen md:w-full bg-top bg-no-repeat drop-shadow-2xl" style={{ backgroundImage: "url('/EvaluationGreenBar.png')" }}>
+
+        <div className="mt-20">
+      <div className="flex justify-center items-center pb-10 relative">
             <div className=" bg-white shadow-2xl  px-4 pt-5 pb-5 rounded-3xl    rounded-full overflow-hidden ">
                   <p className="text-3xl text-center hover:font-bold duration-200">{pregunta}</p>
                   </div>
@@ -128,15 +151,18 @@ const MyComponent: React.FC<TallerPost> = ({ pregunta, descripcion }) => {
                     )}
     
     
-            <div className="w-2/6 pb-10">
+            <div className="pb-10 flex justify-around">
     
-            <div className=" bg-white drop-shadow-2xl       rounded-full px-2 pt-2 pb-12 rounded-lg overflow-hidden text-left ">
-                  <p className="font-medium">{transcript}</p>
-                  </div>
+            <textarea
+      className="w-2/5 bg-white drop-shadow-2xl font-medium rounded-full pt-2 pb-12 rounded-lg text-left"
+      value={isListening ? savedTranscript : savedTranscript} onChange={handleInputChange}
+    />
               </div>
-    
-          
-          </div>
+
+
+        </div>
+      </div>
+      </div>
     
           
             
