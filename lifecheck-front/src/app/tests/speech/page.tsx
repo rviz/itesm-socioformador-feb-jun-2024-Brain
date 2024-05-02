@@ -1,5 +1,5 @@
-'use client'
-import "babel-polyfill";
+
+import "@babel/polyfill";
 import 'regenerator-runtime/runtime';
 
 import React from 'react';
@@ -20,14 +20,18 @@ import { Play } from "next/font/google";
 import { kMaxLength } from "buffer";
 
 import Question from '../../../components/Questions';
+import { getEducationQuestions } from "@/src/data/questions";
 
-const Dictaphone = () => {
+export default async function Dictaphone() {
+  const questions = await getEducationQuestions();
 
   return (
     <div>
-      <Question pregunta="¿Qué alimentos sueles consumir habitualmente?" descripcion="Desayuno, Comida, Refrigerio, Cena. Alimentos y Bebidas."/>
-      <Question pregunta="¿Qué alimentos sueles consumir habitualmente?" descripcion="Desayuno, Comida, Refrigerio, Cena. Alimentos y Bebidas."/>
+      {questions.map((question) => (
+        <div>
+        <Question pregunta={question.qText} descripcion="Desayuno, Comida, Refrigerio, Cena. Alimentos y Bebidas."/></div>
+        
+      ))}
     </div>
   );
 };
-export default Dictaphone;

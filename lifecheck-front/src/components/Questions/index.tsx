@@ -19,16 +19,15 @@ import {
 import { Play } from "next/font/google";
 import { kMaxLength } from "buffer";
 
-import Question from '.';
 import { useState } from 'react';
 
-interface TallerPost {
+interface QuestionComponent {
   pregunta: string,
     descripcion: string
 }
 
 
-const MyComponent: React.FC<TallerPost> = ({ pregunta, descripcion }) => {
+const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion }) => {
     const {
         transcript,
         listening,
