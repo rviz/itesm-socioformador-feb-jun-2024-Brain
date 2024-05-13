@@ -15,3 +15,13 @@ export async function getEducationQuestions() {
 export async function addQuestion(qText: string, qType: boolean, categoryId: number, createdBy: string) {
     return question;
 }
+
+export async function addQuestionTest(qText: string, qType: boolean, categoryId: number, createdBy: string) {
+  // Utiliza Drizzle para insertar una nueva pregunta
+  const result = await db.insert(question).values({
+    qText: qText,
+    qType: qType,
+    categoryId: categoryId
+  }).returning();
+  return result;
+}

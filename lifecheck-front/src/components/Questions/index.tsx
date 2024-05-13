@@ -4,6 +4,7 @@ import "regenerator-runtime/runtime";
 
 import React from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import { addQuestionTest } from "@/src/data/questions";
 
 import Image from "next/image";
 import {
@@ -157,7 +158,7 @@ const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion }) => 
       value={isListening ? savedTranscript : savedTranscript} onChange={handleInputChange}
     />
               </div>
-
+              <button>dsd</button>
 
         </div>
       </div>
