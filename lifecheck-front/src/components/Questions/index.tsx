@@ -4,7 +4,6 @@ import "regenerator-runtime/runtime";
 
 import React from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { addQuestionTest } from "@/src/data/questions";
 
 import Image from "next/image";
 import {
@@ -21,14 +20,18 @@ import { Play } from "next/font/google";
 import { kMaxLength } from "buffer";
 
 import { useState } from 'react';
+import { addQuestion } from "@/src/data/questions";
+import { answer, question } from "@/src/db/schema";
 
 interface QuestionComponent {
   pregunta: string,
     descripcion: string
+    answerAdder: (question_id: number, answerTranscript: string) => void;
+    question_id: number;
 }
 
 
-const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion }) => {
+const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion, question_id, answerAdder }) => {
     const {
         transcript,
         listening,
@@ -123,6 +126,17 @@ const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion }) => 
                   </div>
                     </button>
                     )}
+
+{/* GUARDAR RESPUESTA*/}
+<button onClick={() => answerAdder(question_id, savedTranscript)}>
+                    <div className="group h-full bg-white bg-opacity-75 px-2 pt-2 pb-2 rounded-full    overflow-hidden text-center relative hover:bg-[#57d96d] transition duration 1000">
+                    <div className="flex justify-center items-center">
+                      {" "}
+                      <SparklesIcon className="h-20 w-20 text-[#57d96d] p-4 group-hover:text-white transition duration 1000" />{" "}
+                    </div>
+                    <p className="font-bold leading-relaxed mb-3 group-hover:text-white transition duration 1000">Guardar</p>
+                  </div>
+                    </button>
     
                     <div className="px-3"/>
     
@@ -155,10 +169,9 @@ const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion }) => 
     
             <textarea
       className="w-2/5 bg-white drop-shadow-2xl font-medium rounded-full pt-2 pb-12 rounded-lg text-left"
-      value={isListening ? savedTranscript : savedTranscript} onChange={handleInputChange}
+      value={isListening ? transcript : savedTranscript} onChange={handleInputChange}
     />
               </div>
-              <button>dsd</button>
 
         </div>
       </div>
