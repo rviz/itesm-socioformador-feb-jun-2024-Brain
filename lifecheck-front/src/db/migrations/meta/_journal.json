@@ -50,6 +50,13 @@
       "when": 1716313606717,
       "tag": "0006_stale_squadron_supreme",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1716314039568,
+      "tag": "0007_long_living_lightning",
+      "breakpoints": true
     }
   ]
 }
