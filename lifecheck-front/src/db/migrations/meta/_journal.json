@@ -43,6 +43,13 @@
       "when": 1716311058700,
       "tag": "0005_lucky_lady_vermin",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1716313606717,
+      "tag": "0006_stale_squadron_supreme",
+      "breakpoints": true
     }
   ]
 }
