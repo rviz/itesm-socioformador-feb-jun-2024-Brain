@@ -22,11 +22,6 @@ import { Play } from "next/font/google";
 import { kMaxLength } from "buffer";
 
 import Question from '../../../components/Questions';
-import { addAnswerWithQID, getEducationQuestions } from "@/src/data/questions";
-//import handler from '@/src/app/api/questions/route';
-import { db } from '@/src/db/db';
-import { question } from '@/src/db/schema';
-
 
 async function addQuestionTest(qText, qType, categoryId, createdBy) {
   // Suponiendo que tienes configurada una API en `/api/addQuestion`
@@ -43,6 +38,18 @@ async function addQuestionTest(qText, qType, categoryId, createdBy) {
 async function addAnswer(aText, questionId, createdBy) {
   // Suponiendo que tienes configurada una API en `/api/addQuestion`
   const response = await fetch('/api/answers', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({  aText, questionId, createdBy})
+  });
+  return await response.json();
+}
+
+async function replaceAnswer(aText, questionId, createdBy) {
+  // Suponiendo que tienes configurada una API en `/api/addQuestion`
+  const response = await fetch('/api/replaceAnswers', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -81,6 +88,12 @@ export default function Dictaphone() {
     loadQuestions();
   }, []);
 
+  const fetchAnswers = async () => {
+    const responseA = await fetch('/api/answers');
+        const dataA = await responseA.json();
+        setAnswersGot(dataA.answers);
+  }
+
   const handleAddQuestion = async () => {
     try {
       const newQuestion = await addQuestionTest("MyPregunt", true, 1, "Buenas");
@@ -93,13 +106,35 @@ export default function Dictaphone() {
 
   const handleAddAnswer = async (question_id: number, answerTranscript: string) => {
     try {
-      const newAnswer = await addAnswer(answerTranscript, question_id, "Buenas");
+      const newAnswer = await addAnswer(answerTranscript, question_id, null);
       //setQuestions([...questions, newQuestion]);
     } catch (error) {
       console.error('Error adding answer:', error);
     }
   };
 
+  const handleReplaceAnswer = async (question_id: number, answerTranscript: string) => {
+    try {
+      const newAnswer = await replaceAnswer(answerTranscript, question_id, null);
+      //setQuestions([...questions, newQuestion]);
+    } catch (error) {
+      console.error('Error replacing answer:', error);
+    }
+  };
+
+  let firstQuestionID = 0;
+  if(questions.length > 0)
+    {firstQuestionID = questions[0].questionId;}
+  const [currentQuestionID, setCurrentQuestionID] = useState(firstQuestionID);
+  const voidCurrentQuestionID = (question_id: number) =>
+  {
+    setCurrentQuestionID(question_id);
+  };
+
+  const CheckIfSameQID = (question_id: number) =>
+    {
+      setCurrentQuestionID(question_id);
+    };
 
 
 
@@ -115,26 +150,39 @@ export default function Dictaphone() {
   return (
     <div>
       <div>
-      {questions.map((question) => (
-        <div>
-        <Question pregunta={question.qText} descripcion="Desayuno, Comida, Refrigerio, Cena. Alimentos y Bebidas." answerAdder={handleAddAnswer} question_id={question.questionId}/>
+      {questions.map((question) => {
+      // Encuentra la respuesta que coincide con el ID de la pregunta.
+      const correspondingAnswer = answersGot.find(answer => answer.questionId == question.questionId);
+
+      return (
+        <div key={question.questionId}>
+          <Question
+            pregunta={question.qText}
+            descripcion="Desayuno, Comida, Refrigerio, Cena. Alimentos y Bebidas."
+            answerAdder={handleReplaceAnswer}
+            question_id={question.questionId}
+            currentQuestionID={currentQuestionID}
+            voidCurrentQuestionID={voidCurrentQuestionID}
+            dbSavedAnswer={correspondingAnswer ? correspondingAnswer.aText : "No hay respuesta previa"}
+            fetchAnswers={fetchAnswers}
+          />
         </div>
-      ))
-      }</div>
+      );
+    })}
+      </div>
 
 {/*<button onClick={handleAddAnswer}>Agregar Answr</button>*/}
 
-      <div>
+      {/*<div>
         {answersGot.map((answer, index) => (
           <div key={index}>
             <p>Answer ID:{answer.id}</p>
             <p>Answer Text:{answer.aText}</p>
             <p>Answer Question ID:{answer.questionId}</p>
             <p>Answer Created At:{answer.createdAt}</p>
-            <p>Answer Created By:{answer.createdBy}</p>
             </div>
             ))}
-      </div>
+          </div>*/}
     </div>
     
   );
