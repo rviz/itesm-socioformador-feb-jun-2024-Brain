@@ -4,7 +4,7 @@ import { company } from './company'; // Assuming the company schema is defined i
 
 export const users = pgTable('users', {
     userId: varchar('user_id', { length: 255 }).primaryKey().notNull(),
-    uName: varchar('u_name', { length: 255 }),
+    personalName: varchar('personal_name', { length: 255 }),
     email: varchar('email', { length: 255 }).notNull().unique(),
     registerDate: timestamp('register_date', { precision: 6, withTimezone: true }).notNull(),
     lastEvaluationDate: timestamp('last_evaluation_date'),

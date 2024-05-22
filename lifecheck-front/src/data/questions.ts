@@ -15,7 +15,7 @@ export async function getEducationQuestions() {
 
 export async function getEducationAnswers() {
   const answers = await dba.query.answer.findMany({
-    where: eq(answer.answerId, 1),
+    //where: eq(answer.answerId, 1),
   });
   return answers;
 }
@@ -42,4 +42,29 @@ export async function addAnswerWithQID(aText: string, questionId: number, create
     createdBy: createdBy
   }).returning();
   return result;
+}
+
+export async function replaceAnswerWithQID(aText: string, questionId: number, createdBy: string) {
+  // Intenta actualizar primero
+  const updateResult = await db.update(answer)
+    .set({
+      aText: aText,
+      createdBy: createdBy
+    })
+    .where(eq(answer.questionId, questionId))
+    .returning();
+
+  // Comprueba si se actualizó alguna fila
+  if (updateResult.length === 0) {
+    // Si no se actualizó ninguna fila, inserta una nueva respuesta
+    const insertResult = await db.insert(answer).values({
+      aText: aText,
+      questionId: questionId,
+      createdBy: createdBy
+    }).returning();
+    return insertResult;
+  }
+
+  // Devuelve el resultado de la actualización si se actualizó una fila
+  return updateResult;
 }
