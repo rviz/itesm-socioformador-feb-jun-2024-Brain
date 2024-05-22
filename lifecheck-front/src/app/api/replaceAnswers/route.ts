@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
 
     // Llama a la función addQuestion para insertar los datos
     try {
-      const answer = await addAnswerWithQID(aText, questionId, createdBy);}
+      const answer = await replaceAnswerWithQID(aText, questionId, createdBy);}
       catch (error) {
         console.log("POST Answer", error);
         return NextResponse.json({error: "No se pudo insertar la Respuesta"}, {status: 500});

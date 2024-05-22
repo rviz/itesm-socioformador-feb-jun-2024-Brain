@@ -42,10 +42,8 @@
     "src/components/ui/button.jsx",
     "src/components/ui/badge.jsx",
     "src/components/ui/avatar.jsx",
-    ".next/types/**/*.ts",
-    "src/components/Header2/index.js",
-    "src/components/Graphs/BarChart.js",
-    "src/iaEngine/chatOpenAI.js"  ],
+    ".next/types/**/*.ts"
+, "src/components/Header2/index.js"  ],
   "exclude": [
     "node_modules"
   ]

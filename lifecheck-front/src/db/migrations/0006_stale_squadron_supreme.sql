@@ -1,1 +1,0 @@
-ALTER TABLE "answer" ADD COLUMN "created_by" varchar;
