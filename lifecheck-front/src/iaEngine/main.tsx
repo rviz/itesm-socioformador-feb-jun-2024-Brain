@@ -13,9 +13,9 @@ async function main() {
 main();
 
 
-const fileStreams = ["edgar/goog-10k.pdf", "edgar/brka-10k.txt"].map((path) =>
+const fileStreams = ["/src/iaEngine/LifecheckGPT.pdf"].map((path) =>
     fs.createReadStream(path),
-  );
+);
    
   // Create a vector store including our two files.
   let vectorStore = await openai.beta.vectorStores.create({

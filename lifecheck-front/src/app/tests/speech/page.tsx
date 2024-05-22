@@ -57,6 +57,8 @@ export default function Dictaphone() {
   const [answersGot, setAnswersGot] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [analysisGot, setAnlysisGot] = useState([]);
+
 
   useEffect(() => {
     const loadQuestions = async () => {
@@ -70,6 +72,9 @@ export default function Dictaphone() {
         const responseA = await fetch('/api/answers');
         const dataA = await responseA.json();
         setAnswersGot(dataA.answers);
+        const responseAnalysis = await fetch('/api/analysis');
+        const dataAnalysis = await responseAnalysis.json();
+        setAnlysisGot(dataAnalysis.analysis);
         // LOADING
         setLoading(false);
       } catch (err) {
@@ -132,6 +137,16 @@ export default function Dictaphone() {
             <p>Answer Question ID:{answer.questionId}</p>
             <p>Answer Created At:{answer.createdAt}</p>
             <p>Answer Created By:{answer.createdBy}</p>
+            </div>
+            ))}
+      </div>
+
+
+      <div>
+        {analysisGot.map((analysis, index) => (
+          <div key={index}>
+            <p>Answer ID:{analysis.userId}</p>
+            <p>Answer Question ID:{analysis.feedbackDescription}</p>
             </div>
             ))}
       </div>
