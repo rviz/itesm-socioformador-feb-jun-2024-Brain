@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { NextRequest, NextResponse } from 'next/server';
 import { get } from 'http';
-import { getEducationQuestions, getEducationAnswers, addQuestionTest, addAnswerWithQID, replaceAnswerWithQID  } from '@/src/data/questions';
+import { getEducationQuestions, getEducationAnswers, addQuestionTest, addAnswerWithQID  } from '@/src/data/questions';
 
 //const db = drizzle(pool, { schema: { question } });
 

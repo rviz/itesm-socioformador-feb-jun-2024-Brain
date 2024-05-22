@@ -43,7 +43,7 @@
     "src/components/ui/badge.jsx",
     "src/components/ui/avatar.jsx",
     ".next/types/**/*.ts"
-, "src/components/Header2/index.js"  ],
+, "src/components/Header2/index.js", "src/components/Graphs/BarChart.js"  ],
   "exclude": [
     "node_modules"
   ]
