@@ -1,10 +1,12 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { pool } from "../db/db";
-import { answer, question } from "../db/schema";
+import { answer, question, user_evaluation_category_analysis } from "../db/schema";
 import { eq } from "drizzle-orm";
 
 const db = drizzle(pool, { schema: { question } });
 const dba = drizzle(pool, { schema: { answer } });
+const dbanalyis = drizzle(pool, { schema: { user_evaluation_category_analysis } });
+
 
 export async function getEducationQuestions() {
   const questions = await db.query.question.findMany({
@@ -19,6 +21,16 @@ export async function getEducationAnswers() {
   });
   return answers;
 }
+
+
+export async function getAnalysis({ params }: { params: { userId: string } }) {
+  const analysis = await dbanalyis.query.user_evaluation_category_analysis.findMany({
+    where: eq(user_evaluation_category_analysis.userId, params.userId),
+  });
+  return analysis;
+}
+
+
 
 export async function addQuestion(qText: string, qType: boolean, categoryId: number, createdBy: string) {
     return question;
