@@ -5,7 +5,7 @@ import { users } from './users'; // Ensure this import points to where the users
 
 export const answer = pgTable('answer', {
     answerId: serial('answer_id').primaryKey(),
-    userId: varchar('user_id', { length: 255 }).references(() => users.userId),
+    userId: varchar('user_id', { length: 255 }).notNull().references(() => users.userId),
     aText: text('a_text').notNull(), // 'text' type used for potentially long text entries
     questionId: integer('question_id').references(() => question.questionId),
     createdAt: timestamp('created_at').default(sql`current_timestamp`),

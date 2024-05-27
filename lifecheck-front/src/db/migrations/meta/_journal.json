@@ -64,6 +64,13 @@
       "when": 1716576611493,
       "tag": "0008_brave_molly_hayes",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1716850424999,
+      "tag": "0009_easy_sinister_six",
+      "breakpoints": true
     }
   ]
 }
