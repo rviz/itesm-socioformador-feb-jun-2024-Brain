@@ -16,26 +16,30 @@ export default function BarChart({ data }) {
             const labels = ["Análisis de calidad de vida"];
             let healthGrades = [];
             let educationGrades = [];
+            let lifeSatisfactionGrades = [];
+            let housingGrades = [];
+            let environmentGrades = [];
+            let incomeGrades = [];
+            let securityGrades = [];
+            let workLifeBalanceGrades = [];
             //const lastAnalysis = data[data.length - 1];
             const lastAnalysis = data.length > 0 ? data[data.length - 1] : null;
             console.log("lastAnalysis", lastAnalysis);
             // const healthGrades = lastAnalysis.map((analysis) => analysis.healthGrades);
             // console.log("mymy", healthGrades);
             if (lastAnalysis !== null) {
-                healthGrades = [lastAnalysis.healthGrade]; // Convert healthGrade to array
+                healthGrades = [lastAnalysis.gradeHealth]; // Convert healthGrade to array
                 console.log("MYMYHEALTH", healthGrades);
-                educationGrades = [lastAnalysis.educationGrade]; // Convert educationGrade to array
-                console.log("MYMYEDUCATION", educationGrades);
+                educationGrades = [lastAnalysis.gradeEducation]; // Convert educationGrade to array
+                lifeSatisfactionGrades = [lastAnalysis.gradeLifeSatisfaction];  
+                housingGrades = [lastAnalysis.gradeHousing];  
+                environmentGrades = [lastAnalysis.gradeEnvironment];  
+                incomeGrades = [lastAnalysis.gradeIncome];  
+                securityGrades = [lastAnalysis.gradeSecurity];  
+                workLifeBalanceGrades = [lastAnalysis.gradeWorkLifeBalance];
+
                 console.log("si hay datos");
             } else {
-                healthGrades = [100];
-                educationGrades = [100];
-                const livingGrades = [100];
-                const lifeSatisfactionGrades = [100];
-                const environmentGrades = [100];
-                const incomeGrades = [100];
-                const securityGrades = [100];
-                const workLifeBalanceGrades = [100];
                 console.log("no hay datos");
             }   
  
@@ -49,12 +53,7 @@ export default function BarChart({ data }) {
             // const lastEducationGrade = educationGrades[educationGrades.length - 1]; // Accessing the last element using array indexing
             // console.log("Last education grade:", lastEducationGrade);
 
-            const livingGrades = [100];
-            const lifeSatisfactionGrades = [100];
-            const environmentGrades = [100];
-            const incomeGrades = [100];
-            const securityGrades = [100];
-            const workLifeBalanceGrades = [100];
+            
             //const array = [ "Salud", "Educación", "Vivienda ", "Satisfacción de Vida", "Medio Ambiente", "Ingresos", "Seguridad", "Equilibrio Vida-Trabajo"];
 
             const newChart = new Chart(context, {
@@ -78,7 +77,7 @@ export default function BarChart({ data }) {
                         },
                         {
                             label: "Resultado de Vivienda",
-                            data: livingGrades,
+                            data: housingGrades,
                             backgroundColor: "rgba(255, 206, 86, 0.2)",
                             borderColor: "rgba(255, 206, 86, 1)",
                             borderWidth: 1,
