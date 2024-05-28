@@ -43,7 +43,7 @@
     "src/components/ui/badge.jsx",
     "src/components/ui/avatar.jsx",
     ".next/types/**/*.ts"
-, "src/components/Header2/index.js", "src/iaEngine/chatOpenAI.js"  ],
+, "src/components/Header2/index.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,1 +1,0 @@
-ALTER TABLE "answer" DROP COLUMN IF EXISTS "created_by";

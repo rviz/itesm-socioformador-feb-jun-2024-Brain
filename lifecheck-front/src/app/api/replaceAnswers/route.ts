@@ -26,11 +26,11 @@ export async function POST(req: NextRequest) {
   const payload: AnswerRequest = await req.json();
   
     // Extrae los datos del cuerpo de la solicitud
-    const {aText, questionId, createdBy } = payload;
+    const {aText, questionId, createdBy, userID } = payload;
 
     // Llama a la función addQuestion para insertar los datos
     try {
-      const answer = await replaceAnswerWithQID(aText, questionId, createdBy);}
+      const answer = await replaceAnswerWithQID(aText, questionId, createdBy, userID);}
       catch (error) {
         console.log("POST Answer", error);
         return NextResponse.json({error: "No se pudo insertar la Respuesta"}, {status: 500});
