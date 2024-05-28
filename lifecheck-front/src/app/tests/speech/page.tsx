@@ -3,9 +3,10 @@
 import "@babel/polyfill";
 import 'regenerator-runtime/runtime';
 
-import React from 'react';
+import React, { use } from 'react';
 import { useState, useEffect } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 import Image from "next/image";
 import {
@@ -47,19 +48,20 @@ async function addAnswer(aText, questionId, createdBy) {
   return await response.json();
 }
 
-async function replaceAnswer(aText, questionId, createdBy) {
+async function replaceAnswer(aText, questionId, createdBy, userID) {
   // Suponiendo que tienes configurada una API en `/api/addQuestion`
   const response = await fetch('/api/replaceAnswers', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({  aText, questionId, createdBy})
+    body: JSON.stringify({  aText, questionId, createdBy, userID})
   });
   return await response.json();
 }
 
 export default function Dictaphone() {
+  const { user } = useUser();
   const [questions, setQuestions] = useState([]);
   const [answersGot, setAnswersGot] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -115,7 +117,7 @@ export default function Dictaphone() {
 
   const handleReplaceAnswer = async (question_id: number, answerTranscript: string) => {
     try {
-      const newAnswer = await replaceAnswer(answerTranscript, question_id, null);
+      const newAnswer = await replaceAnswer(answerTranscript, question_id, null, user.sub);
       //setQuestions([...questions, newQuestion]);
     } catch (error) {
       console.error('Error replacing answer:', error);
@@ -169,6 +171,9 @@ export default function Dictaphone() {
         </div>
       );
     })}
+      </div>
+      <div>
+        <p>{user.sub}</p>
       </div>
 
 {/*<button onClick={handleAddAnswer}>Agregar Answr</button>*/}

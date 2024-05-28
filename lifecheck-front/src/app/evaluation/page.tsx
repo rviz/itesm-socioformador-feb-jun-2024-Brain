@@ -1,8 +1,14 @@
 import { AcademicCapIcon, HeartIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import EvaluationCards from "@/src/components/EvaluationCards";
+import {getSession} from '@auth0/nextjs-auth0'
+import { redirect } from "next/navigation";
 
-export default function Evaluation() {
+export default async function Evaluation() {
+  const data = await getSession();
+  if (!data?.user) {
+    redirect('/api/auth/login')
+  }
   return (
     <div className="flex flex-col space-y-4">
       <EvaluationCards />
