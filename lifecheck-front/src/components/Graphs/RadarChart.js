@@ -15,27 +15,25 @@ export default function RadarChart({ data }) {
             const lastAnalysis = data.length > 0 ? data[data.length - 1] : null;
             console.log("lastAnalysis", lastAnalysis);
 
-            let healthGrades = 20;
-            let educationGrades = 20;
-            let livingGrades = 20;
-            let lifeSatisfactionGrades = 20;
-            let environmentGrades = 20;
-            let incomeGrades = 20;
-            let securityGrades = 20;
-            let workLifeBalanceGrades = 20;
+            let healthGrades = 0;
+            let educationGrades = 0;
+            let livingGrades = 0;
+            let lifeSatisfactionGrades = 0;
+            let environmentGrades = 0;
+            let incomeGrades = 0;
+            let securityGrades = 0;
+            let workLifeBalanceGrades = 0;
 
             if (lastAnalysis !== null) {
-                healthGrades =   lastAnalysis.healthGrade;
-                console.log("eeeee", healthGrades);
-                educationGrades = lastAnalysis.educationGrade; // Convert educationGrade to array
-                console.log("fffffff", educationGrades);
-                console.log("si hay datos");
-                livingGrades = 20;
-                lifeSatisfactionGrades = 50;
-                environmentGrades = 40;
-                incomeGrades = 10;
-                securityGrades = 30;
-                workLifeBalanceGrades = 20;
+                healthGrades =   lastAnalysis.gradeHealth;
+                educationGrades = lastAnalysis.gradeEducation; // Convert educationGrade to array
+                livingGrades = lastAnalysis.gradeHousing;  
+                lifeSatisfactionGrades = lastAnalysis.gradeLifeSatisfaction;  
+                environmentGrades = lastAnalysis.gradeEnvironment;  
+                incomeGrades = lastAnalysis.gradeIncome;  
+                securityGrades = lastAnalysis.gradeSecurity;  
+                workLifeBalanceGrades = lastAnalysis.gradeWorkLifeBalance;
+                
             } else {
                 console.log("no hay datos");
             }   

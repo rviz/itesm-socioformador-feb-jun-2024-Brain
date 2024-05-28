@@ -94,8 +94,13 @@ export default function LineChart({ data }) {
             const context = chartRef.current.getContext("2d");
             const labels = data.map((analysis) => analysis.createdAt);
             
-            const healthGrades = data.map((analysis) => analysis.healthGrade);
-            const educationGrades = data.map((analysis) => analysis.educationGrade);
+            let healthGrades = data.map((analysis) => analysis.gradeHealth);
+            let educationGrades = data.map((analysis) => analysis.gradeEducation); // Convert educationGrade to array
+            let housingGrades = data.map((analysis) => analysis.gradeHousing); // Convert housingGrade to array
+            let environmentGrades = data.map((analysis) => analysis.gradeEnvironment); // Convert environmentGrade to array
+            let incomeGrades = data.map((analysis) => analysis.gradeIncome); // Convert incomeGrade to array            
+            let securityGrades = data.map((analysis) => analysis.gradeSecurity); // Convert securityGrade to array  
+            let workLifeBalanceGrades = data.map((analysis) => analysis.gradeWorkLifeBalance); // Convert workLifeBalanceGrade to array
             const datasets = {
                 health: {
                     label: "Health Grade",
@@ -112,6 +117,46 @@ export default function LineChart({ data }) {
                     borderColor: "rgba(54, 162, 235, 1)",
                     borderWidth: 1,
                     fill: true
+                },
+                housing: {
+                    label: "Vivienda",  
+                    data: housingGrades,
+                    backgroundColor: "rgba(255, 206, 86, 0.2)",
+                    borderColor: "rgba(255, 206, 86, 1)",
+                    borderWidth: 1,
+                    fill: true  
+                },
+                environment: {
+                    label: "Medio Ambiente",    
+                    data: environmentGrades,
+                    backgroundColor: "rgba(153, 102, 255, 0.2)",
+                    borderColor: "rgba(153, 102, 255, 1)",
+                    borderWidth: 1,
+                    fill: true  
+                },  
+                income: {
+                    label: "Ingresos",
+                    data: incomeGrades,
+                    backgroundColor: "rgba(255, 159, 64, 0.2)",
+                    borderColor: "rgba(255, 159, 64, 1)",
+                    borderWidth: 1,
+                    fill: true  
+                },  
+                security: {
+                    label: "Seguridad",
+                    data: securityGrades,
+                    backgroundColor: "rgba(255, 99, 132, 0.2)",
+                    borderColor: "rgba(255, 99, 132, 1)",
+                    borderWidth: 1,
+                    fill: true
+                },
+                workLifeBalance: {
+                    label: "Equilibrio Vida-Trabajo",
+                    data: workLifeBalanceGrades,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    borderWidth: 1,
+                    fill: true  
                 }
             };
 
@@ -141,7 +186,7 @@ export default function LineChart({ data }) {
     }, [data, chartRef]);
 
     return (
-        <div style={{ position: "relative", width: "90%", height: "90%" }}>
+        <div style={{ position: "relative", width: "100%", height: "100%" }}>
             <canvas ref={chartRef} />
         </div>
     );
