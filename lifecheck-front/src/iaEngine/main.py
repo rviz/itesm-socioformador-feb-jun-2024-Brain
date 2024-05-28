@@ -17,6 +17,7 @@ from langchain.chains import RetrievalQA
 import pg8000.native
 # import pinecone  | Implemented in another way
 import os
+import json
 
 def getHistory(id:int = -1) -> ChatMessageHistory:
     # Empty history 
@@ -50,7 +51,7 @@ def getContext(userId:int, categoryId:str) -> str:
 
 history = getHistory()
 
-def updateFeedback(userId:str ,categoryId:int ,feedback:str, evaluationId:int) -> bool:
+def updateFeedback(userId:str ,categoryId:int ,feedback:str) -> bool:
     try:
         connection = pg8000.native.Connection(
             database=os.environ["DB_NAME"],
@@ -114,7 +115,7 @@ def getFeedbackFromLLM(userQuestionAnswer:str, infoBasedOnCategory:str, chat) ->
     response = chain.invoke({"messages": history.messages})
     return response.content
 
-def main(userId:str, categoryId:int, evaluationId:int) -> bool:
+def main(userId:str, categoryId:int) -> bool:
     # INITIALIZE
     load_dotenv()
     chat = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature="0.3", verbose=True)
@@ -128,19 +129,19 @@ def main(userId:str, categoryId:int, evaluationId:int) -> bool:
     feedback:str = getFeedbackFromLLM(contextOfQuestionAnswerUser, infoBasedOnCategory, chat)
     
     # 4°- Update the feedback of the user based on all the context 
-    isDone:bool = updateFeedback(userId, categoryId, feedback, evaluationId)
+    isDone:bool = updateFeedback(userId, categoryId, feedback)
     
     return isDone
 
-if __name__ == '__main__':
-    main("1",3, 3)
-    
-       
-    
-  
 
-        
-
-
+def lambda_handler(event, context):
+    # userId, categoryId
+    userId:str = event.get('userId')
+    categoryId:int = event.get('categoryId')
     
+    result = main(userId,categoryId)
     
+    return {
+        'statuscode': 200,
+        'body': json.dumps(result)
+    }
