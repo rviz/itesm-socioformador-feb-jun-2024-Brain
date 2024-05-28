@@ -56,6 +56,7 @@ export default function Page({ className, ...props }: CardProps) {
             </p>
             <p className="text-gray-500 dark:text-gray-400">user.company</p>
             <p className="text-gray-500 dark:text-gray-400">{user.email}</p>
+            <p className="text-gray-500 dark:text-gray-400">{user.sub}</p>
           </div>
           <div className="flex flex-col items-center gap-4">
             <Button variant="outline">Edit Profile</Button>
