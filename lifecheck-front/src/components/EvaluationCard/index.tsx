@@ -1,4 +1,3 @@
-import { CardContent, Card } from "@/src/components/ui/card";
 import Link from "next/link";
 
 import {
@@ -16,53 +15,61 @@ interface EvaluationCard
 {
     cardName: string
     myHref: string
-    cardStyle: string
-    iconStyle: string
 }
 
-const MyComponent: React.FC<EvaluationCard> = ({ cardName, myHref, cardStyle, iconStyle  }) => {
+const MyComponent: React.FC<EvaluationCard> = ({ cardName, myHref  }) => {
+
+
+  // NOTA DE GABO: Porbablemente pienses que puedo poner un parámetro de color en el componente,
+  // pero Tailwind por alguna razón no lo quiere agarrar, entonces tengo que utilizar variables locales
+  // para que jale, entonces no trates de optimizar este código o si no, no jalará
+  let cardColor = "group-hover:bg-black";
+  let iconColor = "text-black";
+if (cardName === 'Vivienda')
+  { cardColor = "group-hover:bg-[#ff9239]"; iconColor = "text-[#ff9239]";}
+else if (cardName === 'Satisfacción')
+  { cardColor = "group-hover:bg-[#487fff]"; iconColor = "text-[#487fff]"}
+else if (cardName === 'Educación')
+  { cardColor = "group-hover:bg-[#fbbf24]"; iconColor = "text-[#fbbf24]"}
+else if (cardName === 'Medio ambiente')
+  { cardColor = "group-hover:bg-[#10b981]"; iconColor = "text-[#10b981]"}
+else if (cardName === 'Salud')
+  { cardColor = "group-hover:bg-[#ef4444]"; iconColor = "text-[#ef4444]"}
+else if (cardName === 'Ingresos')
+  { cardColor = "group-hover:bg-[#9333ea]"; iconColor = "text-[#9333ea]"}
+else if (cardName === 'Seguridad')
+  { cardColor = "group-hover:bg-[#50b6b6]"; iconColor = "text-[#50b6b6]"}
+else if (cardName === 'Equilibrio trabajo-vida')
+  { cardColor = "group-hover:bg-[#f472b6]"; iconColor = "text-[#f472b6]"}
+let cardStyle = "pt-20 pb-20 rounded-lg transition-colors bg-white " + cardColor;
+let iconStyle = "w-16 group-hover:text-white " + iconColor;
+
   return (
     <div>
         <Link href={myHref} passHref className="drop-shadow-xl">
-          <Card className="relative group transition-transform duration-200 ease-in-out transform hover:-translate-y-3">
-            <CardContent className={cardStyle}>
-              <div className={"flex items-center justify-center w-16 h-16 rounded-full text-white mb-4 group-hover:text-pink-400"}>
+          <div className="relative group transition-transform duration-200 ease-in-out transform hover:-translate-y-3">
+            <div className={cardStyle}>
+              <div className={"flex items-center justify-center rounded-full group-hover:text-white duration-200"}>
               {cardName === "Vivienda" ? ( <HomeIcon className={iconStyle} />):
-              cardName === "Satisfacción" ? (<FaceSmileIcon className={iconStyle} />):
+              cardName === "Satisfacción" ? (<FaceSmileIcon className={iconStyle}/>):
               cardName === "Educación" ? (<AcademicCapIcon className={iconStyle} />):
               cardName === "Medio ambiente" ? (<GlobeAmericasIcon className={iconStyle} />):
-              cardName === "Salud" ? (<HeartIcon className={iconStyle} />):
+              cardName === "Salud" ? (<HeartIcon className={iconStyle}/>):
               cardName === "Ingresos" ? (<CurrencyDollarIcon className={iconStyle} />):
               cardName === "Seguridad" ? (<ShieldCheckIcon className={iconStyle} />):
               cardName === "Equilibrio trabajo-vida" ? (<ScaleIcon className={iconStyle} />):
               (<div/>)}
               </div>
-              <h3 className="text-base text-center group-hover:text-white font-semibold mb-2">
+              <p className="text-center text-xl group-hover:text-white font-semibold mb-2 pt-5">
                 {cardName}
-              </h3>
-              <div className="absolute top-4 right-4 flex items-center space-x-2">
+              </p>
+              <div className="absolute top-4 right-4 flex items-center space-x-2 text-[#50b6b6]">
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </Link>
     </div>
   );
 }
-
-const Component = ({ cardName, iconStyle }) => {
-  return (
-    <div>
-      {cardName === "Educación" ? (
-        <AcademicCapIcon className={iconStyle} />
-      ) : cardName === "Salud" ? (
-        <AcademicCapIcon className={iconStyle} />
-      ) : cardName === "Ingresos" ? (
-        <AcademicCapIcon className={iconStyle} />
-      ) : (
-        <AcademicCapIcon className={iconStyle} />  // Ícono por defecto si no se cumplen las condiciones anteriores
-      )}
-    </div>
-  );
-};
 
 export default MyComponent;
