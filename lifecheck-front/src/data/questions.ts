@@ -11,16 +11,13 @@ const dbanalyis = drizzle(pool, { schema: { user_evaluation_category_analysis } 
 
 
 
-export async function getEducationQuestions() {
+export async function getEvaluationQuestions(categoryID: number) {
   const questions = await db.query.question.findMany({
-    where: eq(question.categoryId, 4),
+    where: eq(question.categoryId, categoryID),
   });
   return questions;
 }
-
-
-
-export async function getEducationAnswers() {
+export async function getUserAnswers() {
   const data = await getSession();
   const answers = await dba.query.answer.findMany({
     where : eq(answer.userId, data.user.sub)
@@ -39,7 +36,7 @@ export async function getAnalysis({ params }: { params: { userId: string } }) {
 
 
 
-export async function addQuestion(qText: string, qType: boolean, categoryId: number, createdBy: string) {
+/*export async function addQuestion(qText: string, qType: boolean, categoryId: number, createdBy: string) {
     return question;
 }
 
@@ -51,7 +48,7 @@ export async function addQuestionTest(qText: string, qType: boolean, categoryId:
     categoryId: categoryId
   }).returning();
   return result;
-}
+}*/
 
 export async function addAnswerWithQID(aText: string, questionId: number, createdBy: string) {
   // Utiliza Drizzle para insertar una nueva pregunta

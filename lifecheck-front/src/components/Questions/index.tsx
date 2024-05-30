@@ -4,8 +4,6 @@ import "regenerator-runtime/runtime";
 
 import React from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-
-import Image from "next/image";
 import {
   ClipboardDocumentCheckIcon,
   MicrophoneIcon,
@@ -19,13 +17,8 @@ import {
   PresentationChartBarIcon,
   SparklesIcon,
 } from "@heroicons/react/24/solid";
-import { Play } from "next/font/google";
-import { kMaxLength } from "buffer";
 
 import { useState } from 'react';
-import { addQuestion } from "@/src/data/questions";
-import { answer, question } from "@/src/db/schema";
-import { db } from "@/src/db/db";
 
 interface QuestionComponent {
   pregunta: string,
@@ -136,7 +129,7 @@ const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion, quest
             </div>
     
             <div className="flex justify-center items-center pb-10">
-            <p className="text-1xl text-center duration-200">{descripcion}</p>
+            <p className="text-1xl text-center w-3/5 duration-200">{descripcion}</p>
             </div>
     
             

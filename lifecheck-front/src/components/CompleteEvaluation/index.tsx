@@ -6,8 +6,7 @@ import 'regenerator-runtime/runtime';
 import React, { use } from 'react';
 import { useState, useEffect } from 'react';
 import { useUser } from "@auth0/nextjs-auth0/client";
-
-import Question from '../../../components/Questions';
+import Question from '../Questions';
 
 
 
@@ -47,7 +46,11 @@ async function replaceAnswer(aText, questionId, createdBy, userID) {
   return await response.json();
 }
 
-export default function Dictaphone() {
+interface Category {
+  categoryPath: string;
+}
+
+const MyComponent: React.FC<Category> = ({ categoryPath }) => {
   const { user } = useUser();
   const [questions, setQuestions] = useState([]);
   const [answersGot, setAnswersGot] = useState([]);
@@ -59,7 +62,7 @@ export default function Dictaphone() {
       setLoading(true);
       try {
         // GET DE LAS PREGUNTAS
-        const response = await fetch('/api/questions');
+        const response = await fetch(categoryPath);
         const data = await response.json();
         setQuestions(data.questions);
         // GET DE LAS RESPUESTAS
@@ -147,7 +150,7 @@ export default function Dictaphone() {
         <div key={question.questionId}>
           <Question
             pregunta={question.qText}
-            descripcion="Desayuno, Comida, Refrigerio, Cena. Alimentos y Bebidas."
+            descripcion={question.qDescription}
             answerAdder={handleReplaceAnswer}
             question_id={question.questionId}
             currentQuestionID={currentQuestionID}
@@ -159,23 +162,9 @@ export default function Dictaphone() {
       );
     })}
       </div>
-      <div>
-        <p>{user.sub}</p>
-      </div>
-
-{/*<button onClick={handleAddAnswer}>Agregar Answr</button>*/}
-
-      {/*<div>
-        {answersGot.map((answer, index) => (
-          <div key={index}>
-            <p>Answer ID:{answer.id}</p>
-            <p>Answer Text:{answer.aText}</p>
-            <p>Answer Question ID:{answer.questionId}</p>
-            <p>Answer Created At:{answer.createdAt}</p>
-            </div>
-            ))}
-          </div>*/}
     </div>
     
   );
 }
+
+export default MyComponent;

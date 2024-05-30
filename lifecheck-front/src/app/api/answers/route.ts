@@ -5,14 +5,14 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { NextRequest, NextResponse } from 'next/server';
 import { get } from 'http';
-import { getEducationAnswers, addQuestionTest, addAnswerWithQID, replaceAnswerWithQID  } from '@/src/data/questions';
+import { getUserAnswers, addAnswerWithQID, replaceAnswerWithQID  } from '@/src/data/questions';
 
 //const db = drizzle(pool, { schema: { question } });
 
 
 
 export async function GET(req: NextApiRequest) {
-  const answers = await getEducationAnswers();
+  const answers = await getUserAnswers();
   return NextResponse.json({ answers });
 }
 

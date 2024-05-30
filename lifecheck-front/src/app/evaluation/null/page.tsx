@@ -4,7 +4,7 @@ export default async function CategoryEvaluation() {
 
   return (
     <div>
-      <CompleteEvaluation categoryPath ='/api/categoryQuestions/educacion'/>
+      <p className="text-3xl text-center mt-20 mb-20">Aún no está lista esta evaluación</p>
     </div>
   );
 }
