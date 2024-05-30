@@ -1,18 +1,12 @@
-import { eq } from 'drizzle-orm';
-import { pool } from '@/src/db/db';
-import { answer, question } from '@/src/db/schema';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { drizzle } from 'drizzle-orm/node-postgres';
 import { NextRequest, NextResponse } from 'next/server';
-import { get } from 'http';
-import { getEducationQuestions, getEducationAnswers, addQuestionTest, addAnswerWithQID, replaceAnswerWithQID  } from '@/src/data/questions';
+import { getUserAnswers, replaceAnswerWithQID  } from '@/src/data/questions';
 
 //const db = drizzle(pool, { schema: { question } });
 
 
 
-export async function GET(req: NextApiRequest) {
-  const answers = await getEducationAnswers();
+export async function GET() {
+  const answers = await getUserAnswers();
   return NextResponse.json({ answers });
 }
 
@@ -20,6 +14,7 @@ interface AnswerRequest {
     aText: string;
     questionId: number;
     createdBy: string;
+    userID: string;
 }
 
 export async function POST(req: NextRequest) {

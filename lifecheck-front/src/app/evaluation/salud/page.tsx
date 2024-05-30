@@ -4,7 +4,7 @@ export default async function CategoryEvaluation() {
 
   return (
     <div>
-      <CompleteEvaluation categoryPath ='/api/categoryQuestions/educacion'/>
+      <CompleteEvaluation categoryPath ='/api/categoryQuestions/salud'/>
     </div>
   );
 }
