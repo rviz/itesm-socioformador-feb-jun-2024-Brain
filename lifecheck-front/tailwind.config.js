@@ -18,6 +18,8 @@ module.exports = {
     },
     extend: {
       colors: {
+        'custom-vivienda': '#ff9239',
+        'custom-satisfaccion': '#487fff',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
