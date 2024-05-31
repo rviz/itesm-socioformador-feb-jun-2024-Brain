@@ -138,6 +138,31 @@ const MyComponent: React.FC<Category> = ({ categoryPath }) => {
     return <p>Loading questions...</p>;
   }
 
+  let circlesOrder = 0;
+  const getCirclesOrder = () =>
+  {
+    circlesOrder += 1;
+    if(circlesOrder > 2){circlesOrder = 0;}
+    return circlesOrder;
+  }
+
+  let circlesColors = ["bg-[#000000]", "bg-[#000000]", "bg-[#000000]"];
+  if(categoryPath === '/api/categoryQuestions/vivienda')
+    {circlesColors = ["bg-[#c4ab1f83]", "bg-[#79430783]", "bg-[#ff8f1083]"];}
+  if(categoryPath === '/api/categoryQuestions/satisfaccion')
+    {circlesColors = ["bg-[#1fc4bc83]", "bg-[#431fc483]", "bg-[#1f74c483]"];}
+  else if(categoryPath === '/api/categoryQuestions/educacion')
+    {circlesColors = ["bg-[#cbff1083]", "bg-[#fffb1083]", "bg-[#ffab1083]"];}
+  if(categoryPath === '/api/categoryQuestions/medioAmbiente')
+    {circlesColors = ["bg-[#9ddf3383]", "bg-[#10b16083]", "bg-[#1fc43583]"];}
+  else if(categoryPath === '/api/categoryQuestions/salud')
+    {circlesColors = ["bg-[#ff6c5283]", "bg-[#ff681083]", "bg-[#ff000083]"];}
+  else if(categoryPath === '/api/categoryQuestions/ingresos')
+    {circlesColors = ["bg-[#dd277c83]", "bg-[#7b1fe483]", "bg-[#f945ff83]"];}
+  else if(categoryPath === '/api/categoryQuestions/seguridad')
+    {circlesColors = ["bg-[#2dad8783]", "bg-[#075b7583]", "bg-[#22aca083]"];}
+  else if(categoryPath === '/api/categoryQuestions/equilibrioTrabajoVida')
+    {circlesColors = ["bg-[#f580d283]", "bg-[#c080f583]", "bg-[#f580f583]"];}
 
   return (
     <div>
@@ -157,11 +182,14 @@ const MyComponent: React.FC<Category> = ({ categoryPath }) => {
             voidCurrentQuestionID={voidCurrentQuestionID}
             dbSavedAnswer={correspondingAnswer ? correspondingAnswer.aText : "No hay respuesta previa"}
             fetchAnswers={fetchAnswers}
+            circlesOrder={getCirclesOrder()}
+            circlesColors={circlesColors}
           />
         </div>
       );
     })}
       </div>
+      <div className="text-[#f580d283]"/>
     </div>
     
   );

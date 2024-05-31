@@ -29,10 +29,12 @@ interface QuestionComponent {
     voidCurrentQuestionID: (question_id: number) => void;
     dbSavedAnswer: string;
     fetchAnswers: () => void;
+    circlesOrder: number;
+    circlesColors: string[];
 }
 
 
-const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion, question_id, answerAdder, currentQuestionID, voidCurrentQuestionID, dbSavedAnswer, fetchAnswers }) => {
+const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion, question_id, answerAdder, currentQuestionID, voidCurrentQuestionID, dbSavedAnswer, fetchAnswers, circlesOrder, circlesColors }) => {
     const {
         transcript,
         listening,
@@ -112,24 +114,52 @@ const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion, quest
       };
     
       return (
-        <div>
+        <div className="blur-md hover:blur-0 duration-500">
           {/*<p>Microphone: {listening ? 'on' : 'off'}</p>*/}
           {/*<button onClick={startListening}>Start</button>*/}
           {/*<button onClick={SpeechRecognition.stopListening}>Stop</button>*/}
           {/*<button onClick={resetTranscript}>Reset</button>*/}
     
           <div className="flex flex-col items-center justify-between mb-32">
-      <div className="bg-contain w-screen md:w-full bg-top bg-no-repeat drop-shadow-2xl" style={{ backgroundImage: "url('/EvaluationGreenBar.png')" }}>
+          {circlesOrder === 0 ? (
+            <div className="hover:scale-110 duration-500">
+            <div className={circlesColors[0] + " -translate-x-20 blur-md w-96 h-96 shadow-inner rounded-full"}>
+            <div className={circlesColors[1] + " translate-x-72 translate-y-44 blur-md  w-96 h-96 shadow-inner rounded-full"}>
+            <div className={circlesColors[2] + " -translate-x-96 translate-y-11 blur-md  w-96 h-96 shadow-inner rounded-full"}/>
+              </div>
+              </div></div>
+          ):
+          circlesOrder === 1 ? (
+                <div className="hover:scale-110 duration-500">
+            <div className={circlesColors[0] + " -translate-x-44 translate-y-10 blur-md w-96 h-96 rounded-full"}>
+            <div className={circlesColors[1] + " translate-x-96 translate-y-20 blur-md  w-96 h-96 rounded-full"}>
+            <div className={circlesColors[2] + " -translate-x-72 translate-y-28 blur-md  w-96 h-96 rounded-full"}/>
+              </div>
+              </div></div>
+              ):
+              circlesOrder === 2 ? (
+                <div className="hover:scale-110 duration-500">
+            <div className={circlesColors[0] + " translate-x-52 translate-y-44 blur-md w-96 h-96 shadow-inner rounded-full"}>
+            <div className={circlesColors[1] + " -translate-x-96 translate-y-11 blur-md  w-96 h-96 shadow-inner rounded-full"}>
+            <div className={circlesColors[2] + " translate-x-28 -translate-y-36 blur-md  w-96 h-96 shadow-inner rounded-full"}/>
+              </div>
+              </div></div>
+              ):
+              (<div/>)}
+            
+      <div /*className="bg-contain w-screen md:w-full bg-top bg-no-repeat drop-shadow-2xl" style={{ backgroundImage: "url('/EvaluationGreenBar.png')" }}*/>
 
-        <div className="mt-24">
+        <div className="-mt-24">
       <div className="flex justify-center items-center pb-10 relative px-40">
             <div className=" bg-white shadow-2xl  px-4 pt-5 pb-5 rounded-3xl    rounded-full overflow-hidden ">
                   <p className="text-3xl text-center duration-200">{pregunta}</p>
                   </div>
             </div>
     
-            <div className="flex justify-center items-center pb-10">
-            <p className="text-1xl text-center w-3/5 duration-200">{descripcion}</p>
+            <div className="flex justify-center relative items-center pb-10">
+            <p className="text-1xl text-center w-3/5">{descripcion}
+            <p className="text-1xl text-center text-white -translate-y-5 blur-md">{descripcion}</p>
+            </p>
             </div>
     
             
