@@ -11,7 +11,7 @@ import { getUserAnswers, addAnswerWithQID, replaceAnswerWithQID  } from '@/src/d
 
 
 
-export async function GET(req: NextApiRequest) {
+export async function GET() {
   const answers = await getUserAnswers();
   return NextResponse.json({ answers });
 }
