@@ -17,13 +17,13 @@ export default async function Evaluation() {
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-8">
       <EvaluationCard cardName="Vivienda" myHref="/evaluation/vivienda"/>
-      <EvaluationCard cardName="Satisfacción" myHref="/evaluation/null"/>
+      <EvaluationCard cardName="Satisfacción" myHref="/evaluation/satisfaccion"/>
       <EvaluationCard cardName="Educación" myHref="/evaluation/education"/>
-      <EvaluationCard cardName="Medio ambiente" myHref="/evaluation/null"/>
+      <EvaluationCard cardName="Medio ambiente" myHref="/evaluation/medioAmbiente"/>
       <EvaluationCard cardName="Salud" myHref="/evaluation/salud"/>
-      <EvaluationCard cardName="Ingresos" myHref="/evaluation/null"/>
-      <EvaluationCard cardName="Seguridad" myHref="/evaluation/null"/>
-      <EvaluationCard cardName="Equilibrio trabajo-vida" myHref="/evaluation/null"/>
+      <EvaluationCard cardName="Ingresos" myHref="/evaluation/ingresos"/>
+      <EvaluationCard cardName="Seguridad" myHref="/evaluation/seguridad"/>
+      <EvaluationCard cardName="Equilibrio trabajo-vida" myHref="/evaluation/equilibrioTrabajoVida"/>
       </div>
       <div className="text-[#ff9239] bg-[#ff9239]"></div>
     </div>
