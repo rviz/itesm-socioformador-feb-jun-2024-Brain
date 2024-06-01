@@ -13,7 +13,7 @@ import { getAnalysis } from '@/src/data/questions';
 const userId = '1' // HARDCODED FOR TESTING
 
 export async function GET() {
-  const analysis = await getAnalysis({ params: { userId: userId } });
+  const analysis = await getAnalysis();
   return NextResponse.json({ analysis });
 }
 
