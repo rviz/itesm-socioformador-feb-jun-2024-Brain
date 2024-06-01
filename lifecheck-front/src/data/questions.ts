@@ -26,9 +26,9 @@ export async function getUserAnswers() {
 }
 
 
-export async function getAnalysis({ params }: { params: { userId: string } }) {
+export async function getAnalysis() {
   const analysis = await dbanalyis.query.user_evaluation_category_analysis.findMany({
-    where: eq(user_evaluation_category_analysis.userId, params.userId),
+    //where: eq(user_evaluation_category_analysis.userId, params.userId),
   });
   return analysis;
 }

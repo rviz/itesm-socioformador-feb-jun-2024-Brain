@@ -8,8 +8,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
   
 export default function Dictaphone() {
-  const [questions, setQuestions] = useState([]);
-  const [answersGot, setAnswersGot] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [analysisGot, setAnlysisGot] = useState([]);
@@ -41,14 +39,7 @@ export default function Dictaphone() {
     const loadQuestions = async () => {
       setLoading(true);
       try {
-        // GET DE LAS PREGUNTAS
-        const response = await fetch('/api/questions');
-        const data = await response.json();
-        setQuestions(data.questions);
-        // GET DE LAS RESPUESTAS
-        const responseA = await fetch('/api/answers');
-        const dataA = await responseA.json();
-        setAnswersGot(dataA.answers);
+        // GET DE LOS ANALISIS
         const responseAnalysis = await fetch('/api/analysis');
         const dataAnalysis = await responseAnalysis.json();
         setAnlysisGot(dataAnalysis.analysis);
