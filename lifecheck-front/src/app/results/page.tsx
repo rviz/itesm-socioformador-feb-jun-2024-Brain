@@ -1,14 +1,34 @@
 
 "use client"
 import ResultsTab from "@/src/components/EvaluationCard";
+import CategoryResult from "@/src/components/CategoryResult";
 import BarChart from "@/src/components/Graphs/BarChart";
 import RadarChart from "@/src/components/Graphs/RadarChart";
 import LineChart from "@/src/components/Graphs/LineChartStacked";
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { redirect } from "next/navigation";
   
 export default function Results() {
+  const [user, setUser] = useState(null);
+  const [canLoad, setCanLoad] = useState(false);
 
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        // GET DEL USUARIO
+        const response = await fetch('/api/user');
+        const data = await response.json();
+        setUser(data.user);
+        setCanLoad(true);
+      }
+      catch (err){setCanLoad(true)};
+    };
+
+    loadUser();
+  }, []);
+
+  if(user === null && canLoad === true){redirect('/api/auth/login')}
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -48,6 +68,8 @@ export default function Results() {
     return <p className="text-3xl text-center duration-200 mt-44 mb-44">Cargando Resultados . . .</p>;
   }
 
+  const noResults = "No hay resultados";
+
   const resultsContents = [
     {cardName: "General", littleDown: true},
     {cardName: "Vivienda", littleDown: true },
@@ -61,8 +83,10 @@ export default function Results() {
   ];
 
   return (
-    <div>
-      <p className="text-2xl pb-12 text-center underline underline-offset-8">
+    <div className="mb-48">
+      {(user != null && canLoad == true) ? (
+        <div>
+          <p className="text-2xl pb-12 text-center underline underline-offset-8">
         Resultados
       </p>
 
@@ -105,80 +129,69 @@ export default function Results() {
         )}
 
         
-        {showedCategory == "Vivienda" && (
-          <div className="text-center text-2xs">
-            <p>Se debe demostrar que necesitas mejorar
-            tu rendimiento físico, en cuanto al área de <span className="font-bold">salud</span>.</p>
-            <p>{lastAnalysis.feedbackHousing}</p>
-
-          </div>
+        {showedCategory == "Vivienda" &&  (
+          <div>
+            <CategoryResult cardName={showedCategory} feedback={lastAnalysis ? lastAnalysis.feedbackHousing : noResults}/>
+            </div>
         )}
 
         {showedCategory == "Satisfacción" && (
-          <div className="text-center text-2xs"> 
-            <p>Se debe demostrar que necesitas mejorar
-            tu ... <span className="font-bold"> Satisfacción de Vida </span>.</p>
-            <p>{lastAnalysis.feedbackLifeSatisfaction}</p>
+          <div>
+          <CategoryResult cardName={showedCategory} feedback={lastAnalysis ? lastAnalysis.feedbackLifeSatisfaction : noResults}/>
           </div>
         )}
 
         {showedCategory == "Educación" && (
-          <div className="text-center text-2xs">
-            <p>Se debe demostrar que necesitas mejorar
-            tu ... <span className="font-bold"> Educación </span>.</p>
-            <p>{lastAnalysis.feedbackEducation}</p>
+          <div>
+          <CategoryResult cardName={showedCategory} feedback={lastAnalysis ? lastAnalysis.feedbackEducation : noResults}/>
           </div>
         )}
 
         {showedCategory == "Medio ambiente" && (
-          <div className="text-center text-2xs"> 
-            <p>Se debe demostrar que necesitas mejorar
-            tu ... <span className="font-bold"> isEnvironmentVisible </span>.</p>
-            <p>{lastAnalysis.feedbackEnvironment}</p>
+          <div>
+          <CategoryResult cardName={showedCategory} feedback={lastAnalysis ? lastAnalysis.feedbackEnvironment : noResults}/>
           </div>
         )}
 
         {showedCategory == "Ingresos" && (
-          <div className="text-center text-2xs">
-            <p>Se debe demostrar que necesitas mejorar
-            tu ... <span className="font-bold"> isIncomeVisible </span>.</p>
-            <p>{lastAnalysis.feedbackIncome}</p>
+          <div>
+          <CategoryResult cardName={showedCategory} feedback={lastAnalysis ? lastAnalysis.feedbackIncome : noResults}/>
           </div>
         )}
 
         {showedCategory == "Seguridad" && (
-          <div className="text-center text-2xs">
-            <p>Se debe demostrar que necesitas mejorar
-            tu ... <span className="font-bold"> Educación </span>.</p>
-            <p>{lastAnalysis.feedbackSecurity}</p>
+          <div>
+          <CategoryResult cardName={showedCategory} feedback={lastAnalysis ? lastAnalysis.feedbackSecurity : noResults}/>
           </div>
         )}
 
         {showedCategory == "Equilibrio trabajo-vida" && (
-        <div  className="text-center text-2xs">
-          <p>Se debe demostrar que necesitas mejorar
-          tu ... <span className="font-bold"> Educación </span>.</p>
-          <p>{lastAnalysis.feedbackWorkLifeBalance}</p>
-        </div>
+          <div>
+          <CategoryResult cardName={showedCategory} feedback={lastAnalysis ? lastAnalysis.feedbackWorkLifeBalance : noResults}/>
+          </div>
       )}
 
         {showedCategory == "Salud" && (
-        <div  className="text-center text-2xs">
-          <p>Se debe demostrar que necesitas mejorar
-          tu ... <span className="font-bold"> isHealthVisible </span>.</p>
-          <p>{lastAnalysis.feedbackHealth}</p>
-        </div>
+          <div>
+          <CategoryResult cardName={showedCategory} feedback={lastAnalysis ? lastAnalysis.feedbackHealth : noResults}/>
+          </div>
       )}
 
       
-        <div>
+        {/*<div>
           {analysisGot.map((analysis, index) => (
             <div key={index}>
               <p>Answer ID:{analysis.userId}</p>
               <p>Answer Question ID:{analysis.feedbackDescription}</p>
               </div>
               ))}
-            </div>  
+            </div>*/}
+          </div>
+        ) :
+        (<div/>)}
+      
+
+
           </div>
      );
 }

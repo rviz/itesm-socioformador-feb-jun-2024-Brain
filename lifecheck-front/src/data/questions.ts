@@ -10,6 +10,10 @@ const dba = drizzle(pool, { schema: { answer } });
 const dbanalyis = drizzle(pool, { schema: { user_evaluation_category_analysis } });
 
 
+export async function getMyUser() {
+  const data = await getSession();
+  return data.user;
+}
 
 export async function getEvaluationQuestions(categoryID: number) {
   const questions = await db.query.question.findMany({
@@ -29,7 +33,7 @@ export async function getUserAnswers() {
 export async function getAnalysis() {
   const data = await getSession();
   const analysis = await dbanalyis.query.user_evaluation_category_analysis.findMany({
-    //where: eq(user_evaluation_category_analysis.user_id, data.user.sub),
+    where: eq(user_evaluation_category_analysis.user_id, data.user.sub),
   });
   return analysis;
 }
@@ -54,7 +58,7 @@ export async function addQuestionTest(qText: string, qType: boolean, categoryId:
 export async function addAnswerWithQID(aText: string, questionId: number, createdBy: string) {
   // Utiliza Drizzle para insertar una nueva pregunta
   const result = await dba.insert(answer).values({
-    userId: '33', // Add the missing userId property
+    userId: '', // Add the missing userId property
     aText: aText,
     questionId: questionId,
     createdBy: createdBy,
