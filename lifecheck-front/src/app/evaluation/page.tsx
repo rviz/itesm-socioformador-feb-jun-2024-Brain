@@ -1,7 +1,7 @@
 "use client"
 import ResultsTab from "@/src/components/EvaluationCard";
 import CompleteEvaluation from "@/src/components/CompleteEvaluation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 
 // Backend no compatible
 import {getSession} from '@auth0/nextjs-auth0'
@@ -9,6 +9,26 @@ import { redirect } from "next/navigation";
 import { set } from "@auth0/nextjs-auth0/dist/session";
 
 export default function Evaluation() {
+  const [user, setUser] = useState(null);
+  const [canLoad, setCanLoad] = useState(false);
+
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        // GET DEL USUARIO
+        const response = await fetch('/api/user');
+        const data = await response.json();
+        setUser(data.user);
+        setCanLoad(true);
+      }
+      catch (err){setCanLoad(true)};
+    };
+
+    loadUser();
+  }, []);
+
+  if(user === null && canLoad === true){redirect('/api/auth/login')}
+
   
   const resultsContents = [
     {cardName: "Vivienda", littleDown: true },
@@ -37,11 +57,14 @@ export default function Evaluation() {
 
   return (
     <div>
-      <p className="text-2xl pb-12 text-center underline underline-offset-8">
+      {(user != null && canLoad == true) ? (
+        <div>
+
+<p className="text-2xl pb-12 text-center underline underline-offset-8">
         Evaluación
       </p>
 
-      <div className="flex justify-center mb-20">
+<div className="flex justify-center mb-20">
       {resultsContents.map((content) => {
         return (
           <div className="px-3">
@@ -72,6 +95,12 @@ export default function Evaluation() {
         (<div/>)
         }
       </div>
+
+          </div>
+        ):
+        (<div/>)}
+
+      
     </div>
   );
 }
