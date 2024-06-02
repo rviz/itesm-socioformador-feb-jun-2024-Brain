@@ -1,31 +1,77 @@
-import EvaluationCard from "@/src/components/EvaluationCard";
+"use client"
+import ResultsTab from "@/src/components/EvaluationCard";
+import CompleteEvaluation from "@/src/components/CompleteEvaluation";
+import { useState, useEffect } from "react";
+
+// Backend no compatible
 import {getSession} from '@auth0/nextjs-auth0'
 import { redirect } from "next/navigation";
+import { set } from "@auth0/nextjs-auth0/dist/session";
 
-export default async function Evaluation() {
-  const data = await getSession();
-  if (!data?.user) {
-    redirect('/api/auth/login')
-  }
+export default function Evaluation() {
   
+  const resultsContents = [
+    {cardName: "Vivienda", littleDown: true },
+    {cardName: "Satisfacción", littleDown: true},
+    {cardName: "Educación", littleDown: true},
+    {cardName: "Medio ambiente", littleDown: false},
+    {cardName: "Salud", littleDown: true},
+    {cardName: "Ingresos", littleDown: true},
+    {cardName: "Seguridad", littleDown: true},
+    {cardName: "Equilibrio trabajo-vida", littleDown: false},
+  ];
+
+  const [chosenCategory, setChosenCategory] = useState("Nulo");
+  const [showedCategory, setshowedCategory] = useState("NoDebeSer");
+   
+  const toggleVisibility = (cardName) => {
+    setChosenCategory(cardName);
+    setshowedCategory("NoDebeSer");
+  };
   
+  useEffect(() => {
+    if (showedCategory === "NoDebeSer") {
+      setshowedCategory(chosenCategory);
+    }
+  }, [showedCategory]);
 
   return (
-    <div className="h-screen container mx-auto px-4 py-12 md:py-16 lg:py-10">
+    <div>
       <p className="text-2xl pb-12 text-center underline underline-offset-8">
-        Seleccione una categoría
+        Evaluación
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-8">
-      <EvaluationCard cardName="Vivienda" myHref="/evaluation/vivienda"/>
-      <EvaluationCard cardName="Satisfacción" myHref="/evaluation/satisfaccion"/>
-      <EvaluationCard cardName="Educación" myHref="/evaluation/education"/>
-      <EvaluationCard cardName="Medio ambiente" myHref="/evaluation/medioAmbiente"/>
-      <EvaluationCard cardName="Salud" myHref="/evaluation/salud"/>
-      <EvaluationCard cardName="Ingresos" myHref="/evaluation/ingresos"/>
-      <EvaluationCard cardName="Seguridad" myHref="/evaluation/seguridad"/>
-      <EvaluationCard cardName="Equilibrio trabajo-vida" myHref="/evaluation/equilibrioTrabajoVida"/>
+
+      <div className="flex justify-center mb-20">
+      {resultsContents.map((content) => {
+        return (
+          <div className="px-3">
+            <ResultsTab cardName={content.cardName} showedCategory={showedCategory} littleDown={content.littleDown} toggleVisibility={toggleVisibility}/>
+          </div>
+        );
+      })}
       </div>
-      <div className="text-[#ff9239] bg-[#ff9239]"></div>
+      
+      <div>
+        {
+        (showedCategory === "Vivienda") ?
+        (<CompleteEvaluation categoryPath ='/api/categoryQuestions/vivienda'/>):
+        (showedCategory === "Satisfacción") ?
+        (<CompleteEvaluation categoryPath ='/api/categoryQuestions/satisfaccion'/>):
+        (showedCategory === "Educación") ?
+        (<CompleteEvaluation categoryPath ='/api/categoryQuestions/educacion'/>):
+        (showedCategory === "Medio ambiente") ?
+        (<CompleteEvaluation categoryPath ='/api/categoryQuestions/medioAmbiente'/>):
+        (showedCategory === "Salud") ?
+        (<CompleteEvaluation categoryPath ='/api/categoryQuestions/salud'/>):
+        (showedCategory === "Ingresos") ?
+        (<CompleteEvaluation categoryPath ='/api/categoryQuestions/ingresos'/>):
+        (showedCategory === "Seguridad") ?
+        (<CompleteEvaluation categoryPath ='/api/categoryQuestions/seguridad'/>):
+        (showedCategory === "Equilibrio trabajo-vida") ?
+        (<CompleteEvaluation categoryPath ='/api/categoryQuestions/equilibrioTrabajoVida'/>):
+        (<div/>)
+        }
+      </div>
     </div>
   );
 }

@@ -1,36 +1,22 @@
 
 "use client"
-
+import ResultsTab from "@/src/components/EvaluationCard";
 import BarChart from "@/src/components/Graphs/BarChart";
 import RadarChart from "@/src/components/Graphs/RadarChart";
 import LineChart from "@/src/components/Graphs/LineChartStacked";
 import React from 'react';
 import { useState, useEffect } from 'react';
   
-export default function Dictaphone() {
+export default function Results() {
+
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [analysisGot, setAnlysisGot] = useState([]);
-  const [isRecommendationVisible, setIsRecommendationVisible] = useState(true); // Initially visible
-  const [isHousingVisible, setIsHousingVisible] = useState(false); 
-  const [isLifeSatisfactionVisible, setIsLifeSatisfactionVisible] = useState(false);
-  const [isEducationVisible, setIsEducationVisible] = useState(false);
-  const [isEnvironmentVisible, setIsEnvironmentVisible] = useState(false);
-  const [isHealthVisible, setIsHealthVisible] = useState(false);
-  const [isIncomeVisible, setIsIncomeVisible] = useState(false);
-  const [isSecurityVisible, setIsSecurityVisible] = useState(false);
-  const [isWorkLifeBalanceVisible, setIsWorkLifeBalanceVisible] = useState(false);
+  const [showedCategory, setshowedCategory] = useState("General");
    
-  const toggleVisibility = (visibleState) => {
-    setIsWorkLifeBalanceVisible(visibleState === "WorkLifeBalance");
-    setIsSecurityVisible(visibleState === "Security");
-    setIsIncomeVisible(visibleState === "Income");
-    setIsEnvironmentVisible(visibleState === "Environment");
-    setIsEducationVisible(visibleState === "Education");
-    setIsLifeSatisfactionVisible(visibleState === "LifeSatisfaction");
-    setIsHousingVisible(visibleState === "Housing");
-    setIsRecommendationVisible(visibleState === "Recommendation");
-    setIsHealthVisible(visibleState === "Health");
+  const toggleVisibility = (cardName) => {
+    setshowedCategory(cardName);
   };
 
   const lastAnalysis = analysisGot.length > 0 ? analysisGot[analysisGot.length - 1] : null;
@@ -55,13 +41,24 @@ export default function Dictaphone() {
   }, []);
 
   if (error) {
-    return <p>Error loading questions: {error}</p>;
+    return <p className="text-3xl text-center duration-200 mt-44 mb-44 text-[#8b2121] font-bold">Error al Cargar Resultados</p>;
   }
 
   if (loading) {
-    return <p>Loading questions...</p>;
+    return <p className="text-3xl text-center duration-200 mt-44 mb-44">Cargando Resultados . . .</p>;
   }
 
+  const resultsContents = [
+    {cardName: "General", littleDown: true},
+    {cardName: "Vivienda", littleDown: true },
+    {cardName: "Satisfacción", littleDown: true},
+    {cardName: "Educación", littleDown: true},
+    {cardName: "Medio ambiente", littleDown: false},
+    {cardName: "Salud", littleDown: true},
+    {cardName: "Ingresos", littleDown: true},
+    {cardName: "Seguridad", littleDown: true},
+    {cardName: "Equilibrio trabajo-vida", littleDown: false},
+  ];
 
   return (
     <div>
@@ -69,45 +66,17 @@ export default function Dictaphone() {
         Resultados
       </p>
 
-      <div className="flex justify-center ">
-      <button onClick={() => toggleVisibility("Recommendation")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          General
-        </button>
-      <div className="w-4"></div> {/* Spacer */}
-      <button onClick={() => toggleVisibility("Housing")} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-        Vivienda 
-      </button>
-      <div className="w-4"></div> {/* Spacer */}
-      <button  onClick={() => toggleVisibility("LifeSatisfaction")} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-        Satisfacción de Vida
-      </button>
-      <div className="w-4"></div>
-      <button  onClick={() => toggleVisibility("Education")} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-        Educación
-      </button>
-      <div className="w-4"></div>
-      <button  onClick={() => toggleVisibility("Environment")}  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-        Medio Ambiente
-      </button>
-      <div className="w-4"></div>
-      <button onClick={() => toggleVisibility("Health")}  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-        Salud
-      </button>
-      <div className="w-4"></div>
-      <button onClick={() => toggleVisibility("Income")}  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-        Ingresos
-      </button>
-      <div className="w-4"></div>
-      <button onClick={() => toggleVisibility("Security")}  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-        Seguridad
-      </button>
-      <div className="w-4"></div>
-      <button onClick={() => toggleVisibility("WorkLifeBalance")}   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-      Equilibrio Trabajo-Vida
-      </button>
+      <div className="flex justify-center mb-20">
+      {resultsContents.map((content) => {
+        return (
+          <div className="px-3">
+            <ResultsTab cardName={content.cardName} showedCategory={showedCategory} littleDown={content.littleDown} toggleVisibility={toggleVisibility}/>
+          </div>
+        );
+      })}
       </div>
 
-      {isRecommendationVisible && (
+      {showedCategory == "General" && (
       <div>
       <div className="flex justify-center space-y-7">
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -136,7 +105,7 @@ export default function Dictaphone() {
         )}
 
         
-        {isHousingVisible && (
+        {showedCategory == "Vivienda" && (
           <div className="text-center text-2xs">
             <p>Se debe demostrar que necesitas mejorar
             tu rendimiento físico, en cuanto al área de <span className="font-bold">salud</span>.</p>
@@ -145,7 +114,7 @@ export default function Dictaphone() {
           </div>
         )}
 
-        {isLifeSatisfactionVisible && (
+        {showedCategory == "Satisfacción" && (
           <div className="text-center text-2xs"> 
             <p>Se debe demostrar que necesitas mejorar
             tu ... <span className="font-bold"> Satisfacción de Vida </span>.</p>
@@ -153,7 +122,7 @@ export default function Dictaphone() {
           </div>
         )}
 
-        {isEducationVisible && (
+        {showedCategory == "Educación" && (
           <div className="text-center text-2xs">
             <p>Se debe demostrar que necesitas mejorar
             tu ... <span className="font-bold"> Educación </span>.</p>
@@ -161,7 +130,7 @@ export default function Dictaphone() {
           </div>
         )}
 
-        {isEnvironmentVisible && (
+        {showedCategory == "Medio ambiente" && (
           <div className="text-center text-2xs"> 
             <p>Se debe demostrar que necesitas mejorar
             tu ... <span className="font-bold"> isEnvironmentVisible </span>.</p>
@@ -169,7 +138,7 @@ export default function Dictaphone() {
           </div>
         )}
 
-        {isIncomeVisible && (
+        {showedCategory == "Ingresos" && (
           <div className="text-center text-2xs">
             <p>Se debe demostrar que necesitas mejorar
             tu ... <span className="font-bold"> isIncomeVisible </span>.</p>
@@ -177,7 +146,7 @@ export default function Dictaphone() {
           </div>
         )}
 
-        {isSecurityVisible && (
+        {showedCategory == "Seguridad" && (
           <div className="text-center text-2xs">
             <p>Se debe demostrar que necesitas mejorar
             tu ... <span className="font-bold"> Educación </span>.</p>
@@ -185,7 +154,7 @@ export default function Dictaphone() {
           </div>
         )}
 
-        {isWorkLifeBalanceVisible && (
+        {showedCategory == "Equilibrio trabajo-vida" && (
         <div  className="text-center text-2xs">
           <p>Se debe demostrar que necesitas mejorar
           tu ... <span className="font-bold"> Educación </span>.</p>
@@ -193,7 +162,7 @@ export default function Dictaphone() {
         </div>
       )}
 
-        {isHealthVisible && (
+        {showedCategory == "Salud" && (
         <div  className="text-center text-2xs">
           <p>Se debe demostrar que necesitas mejorar
           tu ... <span className="font-bold"> isHealthVisible </span>.</p>
