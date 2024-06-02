@@ -27,8 +27,9 @@ export async function getUserAnswers() {
 
 
 export async function getAnalysis() {
+  const data = await getSession();
   const analysis = await dbanalyis.query.user_evaluation_category_analysis.findMany({
-    //where: eq(user_evaluation_category_analysis.userId, params.userId),
+    //where: eq(user_evaluation_category_analysis.user_id, data.user.sub),
   });
   return analysis;
 }

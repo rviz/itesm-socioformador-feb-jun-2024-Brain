@@ -38,6 +38,12 @@ export default function Header2() {
             Evaluación
           </Link>
           <Link
+            href="/results"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Resultados
+          </Link>
+          <Link
             href="/business"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >

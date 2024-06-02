@@ -131,11 +131,11 @@ const MyComponent: React.FC<Category> = ({ categoryPath }) => {
 
 
   if (error) {
-    return <p>Error loading questions: {error}</p>;
+    return <p className="text-3xl text-center duration-200 mb-44 text-[#8b2121] font-bold">Error al Cargar Evaluación</p>;
   }
 
   if (loading) {
-    return <p>Loading questions...</p>;
+    return <p className="text-3xl text-center duration-200 mb-44">Cargando Evaluación . . .</p>;
   }
 
   let circlesOrder = 0;
