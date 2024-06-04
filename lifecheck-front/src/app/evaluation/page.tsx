@@ -1,7 +1,6 @@
 "use client"
 import ResultsTab from "@/src/components/EvaluationCard";
 import CompleteEvaluation from "@/src/components/CompleteEvaluation";
-import CallApi from "@/src/components/CallApi";
 import { useState, useEffect, use } from "react";
 
 // Backend no compatible
@@ -60,9 +59,6 @@ export default function Evaluation() {
     <div>
       {(user != null && canLoad == true) ? (
         <div>
-
-            <CallApi/>
-
 <p className="text-2xl pb-12 text-center underline underline-offset-8">
         Evaluación
       </p>
