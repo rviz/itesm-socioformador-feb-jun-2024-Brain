@@ -22,8 +22,6 @@
       "when": 1714009922833,
       "tag": "0002_fixed_masque",
       "breakpoints": true
-<<<<<<< HEAD
-=======
     },
     {
       "idx": 3,
@@ -73,7 +71,27 @@
       "when": 1716850424999,
       "tag": "0009_easy_sinister_six",
       "breakpoints": true
->>>>>>> b084dc07005b69a8ecb471fd6dcfb9fd14cbfb97
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1717556981909,
+      "tag": "0010_fancy_star_brand",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1717557775567,
+      "tag": "0011_conscious_husk",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "5",
+      "when": 1717557920044,
+      "tag": "0012_tearful_kang",
+      "breakpoints": true
     }
   ]
 }

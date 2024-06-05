@@ -6,10 +6,10 @@ import { user_evaluation_answer } from './user_evaluation_answer'; // Ensure thi
 
 export const user_evaluation_category_analysis = pgTable('user_evaluation_category_analysis', {
     userEvaluationCategoryAnalysisId: serial('user_evaluation_category_analysis_id').primaryKey(),
-    user_id: integer('user_id').notNull().references(() => users.userId),
-    userEvaluationClosedQuestionAnswerId: integer('user_evaluation_closed_question_answer_id').notNull().references(() => user_evaluation_closed_question_answer.userEvaluationClosedQuestionAnswerId),
-    userEvaluationAnswerId: integer('user_evaluation_answer_id').notNull().references(() => user_evaluation_answer.userEvaluationAnswerId),
-    feedbackDescription: text('feedback_description').notNull(),
+    userId: varchar('user_id', { length: 255 }).notNull().references(() => users.userId),
+    userEvaluationClosedQuestionAnswerId: integer('user_evaluation_closed_question_answer_id').references(() => user_evaluation_closed_question_answer.userEvaluationClosedQuestionAnswerId),
+    userEvaluationAnswerId: integer('user_evaluation_answer_id').references(() => user_evaluation_answer.userEvaluationAnswerId),
+    feedbackDescription: text('feedback_description'),
     feedbackHealth: text('feedback_health'),
     feedbackEducation: text('feedback_education'),
     feedbackHousing: text('feedback_housing'),
@@ -18,7 +18,7 @@ export const user_evaluation_category_analysis = pgTable('user_evaluation_catego
     feedbackIncome: text('feedback_income'),
     feedbackSecurity: text('feedback_security'),
     feedbackWorkLifeBalance: text('feedback_work_life_balance'),
-    grade: integer('grade').notNull(),
+    grade: integer('grade'),
     gradeHealth: integer('grade_health'),
     gradeEducation: integer('grade_education'),
     gradeHousing: integer('grade_housing'),
