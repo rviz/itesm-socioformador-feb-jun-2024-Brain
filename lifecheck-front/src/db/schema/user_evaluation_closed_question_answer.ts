@@ -6,7 +6,7 @@ import { question_option } from './question_option'; // Ensure this import point
 
 export const user_evaluation_closed_question_answer = pgTable('user_evaluation_closed_question_answer', {
     userEvaluationClosedQuestionAnswerId: serial('user_evaluation_closed_question_answer_id').primaryKey(),
-    userId: integer('user_id').notNull().references(() => users.userId),
+    userId: varchar('user_id', { length: 255 }).notNull().references(() => users.userId),
     questionId: integer('question_id').notNull().references(() => question.questionId),
     questionOptionId: integer('question_option_id').notNull().references(() => question_option.questionOptionId),
     createdAt: timestamp('created_at').default(sql`current_timestamp`),
