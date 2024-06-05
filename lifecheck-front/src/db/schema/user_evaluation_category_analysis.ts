@@ -8,7 +8,7 @@ export const user_evaluation_category_analysis = pgTable('user_evaluation_catego
     userEvaluationCategoryAnalysisId: serial('user_evaluation_category_analysis_id').primaryKey(),
     userId: varchar('user_id', { length: 255 }).notNull().references(() => users.userId),
     userEvaluationClosedQuestionAnswerId: integer('user_evaluation_closed_question_answer_id').references(() => user_evaluation_closed_question_answer.userEvaluationClosedQuestionAnswerId),
-    userEvaluationAnswerId: integer('user_evaluation_answer_id').notNull().references(() => user_evaluation_answer.userEvaluationAnswerId),
+    userEvaluationAnswerId: integer('user_evaluation_answer_id').references(() => user_evaluation_answer.userEvaluationAnswerId),
     feedbackDescription: text('feedback_description'),
     feedbackHealth: text('feedback_health'),
     feedbackEducation: text('feedback_education'),

@@ -1,0 +1,1 @@
+ALTER TABLE "user_evaluation_category_analysis" ALTER COLUMN "user_evaluation_answer_id" DROP NOT NULL;
