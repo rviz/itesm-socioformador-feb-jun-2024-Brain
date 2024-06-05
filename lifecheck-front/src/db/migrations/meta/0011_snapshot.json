@@ -1,0 +1,966 @@
+{
+  "id": "537391ec-2186-4602-ac59-0113a37ad442",
+  "prevId": "d4455350-3cfa-4af8-84d1-2bc3c5a3ba5d",
+  "version": "5",
+  "dialect": "pg",
+  "tables": {
+    "answer": {
+      "name": "answer",
+      "schema": "",
+      "columns": {
+        "answer_id": {
+          "name": "answer_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "a_text": {
+          "name": "a_text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "question_id": {
+          "name": "question_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "current_timestamp"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "answer_user_id_users_user_id_fk": {
+          "name": "answer_user_id_users_user_id_fk",
+          "tableFrom": "answer",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "answer_question_id_question_question_id_fk": {
+          "name": "answer_question_id_question_question_id_fk",
+          "tableFrom": "answer",
+          "tableTo": "question",
+          "columnsFrom": [
+            "question_id"
+          ],
+          "columnsTo": [
+            "question_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "category": {
+      "name": "category",
+      "schema": "",
+      "columns": {
+        "category_id": {
+          "name": "category_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "cat_name": {
+          "name": "cat_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "current_timestamp"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "category_cat_name_unique": {
+          "name": "category_cat_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "cat_name"
+          ]
+        }
+      }
+    },
+    "company": {
+      "name": "company",
+      "schema": "",
+      "columns": {
+        "company_id": {
+          "name": "company_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "c_name": {
+          "name": "c_name",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sector": {
+          "name": "sector",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "evaluation_timer": {
+          "name": "evaluation_timer",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "current_timestamp"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "evaluation": {
+      "name": "evaluation",
+      "schema": "",
+      "columns": {
+        "evaluation_id": {
+          "name": "evaluation_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "e_name": {
+          "name": "e_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "current_timestamp"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "evaluation_question": {
+      "name": "evaluation_question",
+      "schema": "",
+      "columns": {
+        "evaluation_question_id": {
+          "name": "evaluation_question_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "evaluation_id": {
+          "name": "evaluation_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "question_id": {
+          "name": "question_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "current_timestamp"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "evaluation_question_evaluation_id_evaluation_evaluation_id_fk": {
+          "name": "evaluation_question_evaluation_id_evaluation_evaluation_id_fk",
+          "tableFrom": "evaluation_question",
+          "tableTo": "evaluation",
+          "columnsFrom": [
+            "evaluation_id"
+          ],
+          "columnsTo": [
+            "evaluation_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "evaluation_question_question_id_question_question_id_fk": {
+          "name": "evaluation_question_question_id_question_question_id_fk",
+          "tableFrom": "evaluation_question",
+          "tableTo": "question",
+          "columnsFrom": [
+            "question_id"
+          ],
+          "columnsTo": [
+            "question_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "evaluation_user": {
+      "name": "evaluation_user",
+      "schema": "",
+      "columns": {
+        "evaluation_user_id": {
+          "name": "evaluation_user_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "start_date": {
+          "name": "start_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "evaluation_id": {
+          "name": "evaluation_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "current_timestamp"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "evaluation_user_user_id_users_user_id_fk": {
+          "name": "evaluation_user_user_id_users_user_id_fk",
+          "tableFrom": "evaluation_user",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "evaluation_user_evaluation_id_evaluation_evaluation_id_fk": {
+          "name": "evaluation_user_evaluation_id_evaluation_evaluation_id_fk",
+          "tableFrom": "evaluation_user",
+          "tableTo": "evaluation",
+          "columnsFrom": [
+            "evaluation_id"
+          ],
+          "columnsTo": [
+            "evaluation_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "question_option": {
+      "name": "question_option",
+      "schema": "",
+      "columns": {
+        "question_option_id": {
+          "name": "question_option_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "qop_text": {
+          "name": "qop_text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "question_id": {
+          "name": "question_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "current_timestamp"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "question_option_question_id_question_question_id_fk": {
+          "name": "question_option_question_id_question_question_id_fk",
+          "tableFrom": "question_option",
+          "tableTo": "question",
+          "columnsFrom": [
+            "question_id"
+          ],
+          "columnsTo": [
+            "question_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "question": {
+      "name": "question",
+      "schema": "",
+      "columns": {
+        "question_id": {
+          "name": "question_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "q_text": {
+          "name": "q_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "q_type": {
+          "name": "q_type",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "q_description": {
+          "name": "q_description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "category_id": {
+          "name": "category_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "current_timestamp"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "question_category_id_category_category_id_fk": {
+          "name": "question_category_id_category_category_id_fk",
+          "tableFrom": "question",
+          "tableTo": "category",
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "category_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user_evaluation_answer": {
+      "name": "user_evaluation_answer",
+      "schema": "",
+      "columns": {
+        "user_evaluation_answer_id": {
+          "name": "user_evaluation_answer_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "evaluation_user_id": {
+          "name": "evaluation_user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "question_id": {
+          "name": "question_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "answer_id": {
+          "name": "answer_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "current_timestamp"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'1'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_evaluation_answer_evaluation_user_id_evaluation_user_evaluation_user_id_fk": {
+          "name": "user_evaluation_answer_evaluation_user_id_evaluation_user_evaluation_user_id_fk",
+          "tableFrom": "user_evaluation_answer",
+          "tableTo": "evaluation_user",
+          "columnsFrom": [
+            "evaluation_user_id"
+          ],
+          "columnsTo": [
+            "evaluation_user_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "user_evaluation_answer_question_id_question_question_id_fk": {
+          "name": "user_evaluation_answer_question_id_question_question_id_fk",
+          "tableFrom": "user_evaluation_answer",
+          "tableTo": "question",
+          "columnsFrom": [
+            "question_id"
+          ],
+          "columnsTo": [
+            "question_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "user_evaluation_answer_answer_id_answer_answer_id_fk": {
+          "name": "user_evaluation_answer_answer_id_answer_answer_id_fk",
+          "tableFrom": "user_evaluation_answer",
+          "tableTo": "answer",
+          "columnsFrom": [
+            "answer_id"
+          ],
+          "columnsTo": [
+            "answer_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "user_evaluation_answer_user_id_users_user_id_fk": {
+          "name": "user_evaluation_answer_user_id_users_user_id_fk",
+          "tableFrom": "user_evaluation_answer",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user_evaluation_category_analysis": {
+      "name": "user_evaluation_category_analysis",
+      "schema": "",
+      "columns": {
+        "user_evaluation_category_analysis_id": {
+          "name": "user_evaluation_category_analysis_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_evaluation_closed_question_answer_id": {
+          "name": "user_evaluation_closed_question_answer_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_evaluation_answer_id": {
+          "name": "user_evaluation_answer_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "feedback_description": {
+          "name": "feedback_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "feedback_health": {
+          "name": "feedback_health",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "feedback_education": {
+          "name": "feedback_education",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "feedback_housing": {
+          "name": "feedback_housing",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "feedback_life_satisfaction": {
+          "name": "feedback_life_satisfaction",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "feedback_environment": {
+          "name": "feedback_environment",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "feedback_income": {
+          "name": "feedback_income",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "feedback_security": {
+          "name": "feedback_security",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "feedback_work_life_balance": {
+          "name": "feedback_work_life_balance",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "grade": {
+          "name": "grade",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "grade_health": {
+          "name": "grade_health",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "grade_education": {
+          "name": "grade_education",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "grade_housing": {
+          "name": "grade_housing",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "grade_life_satisfaction": {
+          "name": "grade_life_satisfaction",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "grade_environment": {
+          "name": "grade_environment",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "grade_income": {
+          "name": "grade_income",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "grade_security": {
+          "name": "grade_security",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "grade_work_life_balance": {
+          "name": "grade_work_life_balance",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "current_timestamp"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_evaluation_category_analysis_user_id_users_user_id_fk": {
+          "name": "user_evaluation_category_analysis_user_id_users_user_id_fk",
+          "tableFrom": "user_evaluation_category_analysis",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "user_evaluation_category_analysis_user_evaluation_closed_question_answer_id_user_evaluation_closed_question_answer_user_evaluation_closed_question_answer_id_fk": {
+          "name": "user_evaluation_category_analysis_user_evaluation_closed_question_answer_id_user_evaluation_closed_question_answer_user_evaluation_closed_question_answer_id_fk",
+          "tableFrom": "user_evaluation_category_analysis",
+          "tableTo": "user_evaluation_closed_question_answer",
+          "columnsFrom": [
+            "user_evaluation_closed_question_answer_id"
+          ],
+          "columnsTo": [
+            "user_evaluation_closed_question_answer_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "user_evaluation_category_analysis_user_evaluation_answer_id_user_evaluation_answer_user_evaluation_answer_id_fk": {
+          "name": "user_evaluation_category_analysis_user_evaluation_answer_id_user_evaluation_answer_user_evaluation_answer_id_fk",
+          "tableFrom": "user_evaluation_category_analysis",
+          "tableTo": "user_evaluation_answer",
+          "columnsFrom": [
+            "user_evaluation_answer_id"
+          ],
+          "columnsTo": [
+            "user_evaluation_answer_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user_evaluation_closed_question_answer": {
+      "name": "user_evaluation_closed_question_answer",
+      "schema": "",
+      "columns": {
+        "user_evaluation_closed_question_answer_id": {
+          "name": "user_evaluation_closed_question_answer_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "question_id": {
+          "name": "question_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "question_option_id": {
+          "name": "question_option_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "current_timestamp"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_evaluation_closed_question_answer_user_id_users_user_id_fk": {
+          "name": "user_evaluation_closed_question_answer_user_id_users_user_id_fk",
+          "tableFrom": "user_evaluation_closed_question_answer",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "user_evaluation_closed_question_answer_question_id_question_question_id_fk": {
+          "name": "user_evaluation_closed_question_answer_question_id_question_question_id_fk",
+          "tableFrom": "user_evaluation_closed_question_answer",
+          "tableTo": "question",
+          "columnsFrom": [
+            "question_id"
+          ],
+          "columnsTo": [
+            "question_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "user_evaluation_closed_question_answer_question_option_id_question_option_question_option_id_fk": {
+          "name": "user_evaluation_closed_question_answer_question_option_id_question_option_question_option_id_fk",
+          "tableFrom": "user_evaluation_closed_question_answer",
+          "tableTo": "question_option",
+          "columnsFrom": [
+            "question_option_id"
+          ],
+          "columnsTo": [
+            "question_option_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar(255)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "u_name": {
+          "name": "u_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "personal_name": {
+          "name": "personal_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "register_date": {
+          "name": "register_date",
+          "type": "timestamp (6) with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_evaluation_date": {
+          "name": "last_evaluation_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "company_id": {
+          "name": "company_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "current_timestamp"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "users_company_id_company_company_id_fk": {
+          "name": "users_company_id_company_company_id_fk",
+          "tableFrom": "users",
+          "tableTo": "company",
+          "columnsFrom": [
+            "company_id"
+          ],
+          "columnsTo": [
+            "company_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
