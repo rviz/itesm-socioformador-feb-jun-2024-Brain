@@ -11,7 +11,6 @@ interface CallAPI
 }
 
 const MyComponent: React.FC<CallAPI> = ({ paramUserID }) => {
-  const [userIDkey, setUserIDkey] = useState('');
   const [categoryIDkey, setCategoryIDkey] = useState(0);
   const [response, setResponse] = useState('');
 
@@ -25,7 +24,7 @@ const MyComponent: React.FC<CallAPI> = ({ paramUserID }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userIDkey })
+        body: JSON.stringify({ paramUserID, categoryIDkey})
       });
 
       const data = await res.json();
@@ -47,7 +46,7 @@ const MyComponent: React.FC<CallAPI> = ({ paramUserID }) => {
           'Content-Type': 'application/json',
         },
         //body: '{"userIDkey": "2"}'
-        body: JSON.stringify({ userIDkey: userIDkey, categoryIDkey: categoryIDkey})
+        body: JSON.stringify({ userIDkey: paramUserID, categoryIDkey: 1})
       });
 
       const data = await res.json();
@@ -91,20 +90,12 @@ const MyComponent: React.FC<CallAPI> = ({ paramUserID }) => {
   </div>
 
   <div className='mt-10'>
-        <p className='text-center text-3xl font-bold text-[#57bfd9]'>{userIDkey}</p>
+        <p className='text-center text-3xl font-bold text-[#57bfd9]'>{paramUserID}</p>
   </div>
 
 
 
       <form onSubmit={SubmitResponse}>
-        <label htmlFor="userIDkey">User ID:   </label>
-        <input
-          type="text"
-          id="userIDkey"
-          name="userIDkey"
-          value={userIDkey}
-          onChange={(e) => setUserIDkey(e.target.value)}
-        /><br/>
 
 <label htmlFor="categoryIDkey">Category ID:   </label>
         <input
