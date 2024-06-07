@@ -46,7 +46,7 @@ const MyComponent: React.FC<CallAPI> = ({ paramUserID }) => {
           'Content-Type': 'application/json',
         },
         //body: '{"userIDkey": "2"}'
-        body: JSON.stringify({ userIDkey: paramUserID, categoryIDkey: 1})
+        body: JSON.stringify({ userIDkey: paramUserID, categoryIDkey: categoryIDkey})
       });
 
       const data = await res.json();
@@ -85,13 +85,13 @@ const MyComponent: React.FC<CallAPI> = ({ paramUserID }) => {
                       </button>
       </div>
 
-      <div className='mt-10'>
+      {/*<div className='mt-10'>
         <p className='text-center text-3xl font-bold text-[#57bfd9]'>{response}</p>
   </div>
 
   <div className='mt-10'>
         <p className='text-center text-3xl font-bold text-[#57bfd9]'>{paramUserID}</p>
-  </div>
+  </div>*/}
 
 
 
@@ -106,13 +106,13 @@ const MyComponent: React.FC<CallAPI> = ({ paramUserID }) => {
           onChange={(e) => setCategoryIDkey(Number(e.target.value))}
         /><br/>
 
-        <button type="submit">Send Request</button>
+        {/*<button type="submit">Send Request</button>*/}
       </form>
 
-      <div>
+      {/*<div>
         <h2>Response:</h2>
         <pre>{response}</pre>
-  </div>
+  </div>*/}
     </div>
   );
 }

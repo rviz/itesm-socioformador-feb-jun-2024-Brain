@@ -28,13 +28,14 @@ interface QuestionComponent {
     currentQuestionID: number;
     voidCurrentQuestionID: (question_id: number) => void;
     dbSavedAnswer: string;
-    fetchAnswers: () => void;
     circlesOrder: number;
     circlesColors: string[];
+    categoryName: string;
+    CheckIfComplete: () => void;
 }
 
 
-const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion, question_id, answerAdder, currentQuestionID, voidCurrentQuestionID, dbSavedAnswer, fetchAnswers, circlesOrder, circlesColors }) => {
+const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion, question_id, answerAdder, currentQuestionID, voidCurrentQuestionID, dbSavedAnswer, circlesOrder, circlesColors, categoryName, CheckIfComplete }) => {
     const {
         transcript,
         listening,
@@ -83,7 +84,8 @@ const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion, quest
       {
         answerAdder(question_id, savedTranscript);
         dbSavedAnswer = savedTranscript;
-        fetchAnswers();
+        CheckIfComplete();
+        CheckIfComplete();
         setSavedAnswer(true);
       };
 

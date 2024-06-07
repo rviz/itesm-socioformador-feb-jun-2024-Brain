@@ -87,7 +87,7 @@ export default function Results() {
     <div className="mt-5 mb-48">
       {(user != null && canLoad == true) ? (
         <div>
-          <div className="flex justify-center mb-10"><CallApi userID={user.sub}/></div>
+          <div className="flex justify-center mb-10"><CallApi paramUserID={user.sub}/></div>
 
           <p className="text-2xl pb-12 text-center underline underline-offset-8">
         Resultados
@@ -97,7 +97,7 @@ export default function Results() {
       {resultsContents.map((content) => {
         return (
           <div className="px-3">
-            <ResultsTab cardName={content.cardName} showedCategory={showedCategory} littleDown={content.littleDown} toggleVisibility={toggleVisibility}/>
+            <ResultsTab cardName={content.cardName} showedCategory={showedCategory} littleDown={content.littleDown} toggleVisibility={toggleVisibility} checkValue={0}/>
           </div>
         );
       })}
