@@ -194,7 +194,9 @@ const voidComplete = (isComplete, fromCategory) => {
 
   return (
     <div>
-      {(user != null && canLoad == true) ? (
+      {(user != null && canLoad == false) ?
+      (<p className="text-3xl text-center duration-200 mt-40 mb-44">Cargando Evaluaciones . . .</p>):
+        (user != null && canLoad == true) ? (
         <div>
 <p className="text-2xl pb-12 text-center underline underline-offset-8">
         Evaluación

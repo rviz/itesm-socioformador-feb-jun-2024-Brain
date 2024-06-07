@@ -85,7 +85,7 @@ if(cardName == showedCategory){paddleDown += " text-white";}
                 {cardName}
               </p>
             </div>
-            <div className="w-10 translate-x-20 -translate-y-36 drop-shadow-2xl">
+            <div className="w-10 translate-x-20 -translate-y-36 drop-shadow-lg bg-white rounded-full">
           {(checkValue == 0) ? (<div/>):
           (checkValue == 1)? (<QuestionMarkCircleIcon className="text-[#818181]"/>):
           (checkValue == 2)? (<PlayCircleIcon className="text-[#e0ca4d]"/>):

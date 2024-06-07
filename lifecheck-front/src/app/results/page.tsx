@@ -83,6 +83,31 @@ export default function Results() {
     {cardName: "Equilibrio trabajo-vida", littleDown: false},
   ];
 
+  type GPTResponseProps = {
+    text: string;
+  };
+  
+  const GPTResponse: React.FC<GPTResponseProps> = ({ text }) => {
+    const formatText = (input: string): JSX.Element[] => {
+      if (!input) return []; // Si input es undefined o vacío, retorna un arreglo vacío.
+  
+      const segments = input.split(/(\*\*[^*]+\*\*)/g); // Divide el texto por los marcadores de negrita.
+      return segments.map((segment, index) => {
+        if (segment.startsWith('**') && segment.endsWith('**')) {
+          return <strong key={index}>{segment.slice(2, -2)}</strong>; // Formatea como negrita.
+        }
+        // Divide por puntos y agrega saltos de línea.
+        return <React.Fragment key={index}>{segment.split('. ').map((line, idx, arr) => idx < arr.length - 1 ? <span key={idx}>{line}.<br /></span> : <span key={idx}>{line}</span>)}</React.Fragment>;
+      });
+    };
+  
+    return (
+      <div>
+        {formatText(text)}
+      </div>
+    );
+  };
+
   return (
     <div className="mt-5 mb-48">
       {(user != null && canLoad == true) ? (
@@ -102,6 +127,8 @@ export default function Results() {
         );
       })}
       </div>
+
+      {/*<GPTResponse text={lastAnalysis ? lastAnalysis.feedbackLifeSatisfaction : noResults} />*/}
 
       {showedCategory == "General" && (
       <div>
@@ -131,7 +158,6 @@ export default function Results() {
         </div>
         )}
 
-        
         {showedCategory == "Vivienda" &&  (
           <div>
             <CategoryResult cardName={showedCategory} feedback={lastAnalysis ? lastAnalysis.feedbackHousing : noResults}/>
