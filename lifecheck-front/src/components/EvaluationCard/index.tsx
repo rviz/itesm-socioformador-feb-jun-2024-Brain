@@ -9,7 +9,10 @@ import {
   CurrencyDollarIcon,
   ShieldCheckIcon,
   ScaleIcon,
-  ChartPieIcon
+  ChartPieIcon,
+  QuestionMarkCircleIcon,
+  PlayCircleIcon,
+  CheckCircleIcon,
 } from "@heroicons/react/24/solid";
 
 interface EvaluationCard
@@ -18,9 +21,10 @@ interface EvaluationCard
     showedCategory: string;
     littleDown: boolean;
     toggleVisibility?: (string) => void;
+    checkValue: number;
 }
 
-const MyComponent: React.FC<EvaluationCard> = ({ cardName, showedCategory, littleDown, toggleVisibility  }) => {
+const MyComponent: React.FC<EvaluationCard> = ({ cardName, showedCategory, littleDown, toggleVisibility, checkValue }) => {
 
 
   // NOTA DE GABO: Porbablemente pienses que puedo poner un parámetro de color en el componente,
@@ -60,6 +64,8 @@ if(cardName == showedCategory){paddleDown += " text-white";}
 
   return (
     <div>
+        
+
         <button onClick={() => toggleVisibility(cardName)} className="drop-shadow-xl w-28">
           <div className="relative group transition-transform duration-200 ease-in-out transform hover:-translate-y-3">
             <div className={cardStyle}>
@@ -79,8 +85,16 @@ if(cardName == showedCategory){paddleDown += " text-white";}
                 {cardName}
               </p>
             </div>
+            <div className="w-10 translate-x-20 -translate-y-36 drop-shadow-2xl">
+          {(checkValue == 0) ? (<div/>):
+          (checkValue == 1)? (<QuestionMarkCircleIcon className="text-[#818181]"/>):
+          (checkValue == 2)? (<PlayCircleIcon className="text-[#e0ca4d]"/>):
+          (<CheckCircleIcon className="text-[#459a3b]"/>)}
+        </div>
           </div>
         </button>
+
+        
     </div>
   );
 }

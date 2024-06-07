@@ -2,6 +2,7 @@
 "use client"
 import ResultsTab from "@/src/components/EvaluationCard";
 import CategoryResult from "@/src/components/CategoryResult";
+import CallApi from "@/src/components/CallApi";
 import BarChart from "@/src/components/Graphs/BarChart";
 import RadarChart from "@/src/components/Graphs/RadarChart";
 import LineChart from "@/src/components/Graphs/LineChartStacked";
@@ -83,9 +84,11 @@ export default function Results() {
   ];
 
   return (
-    <div className="mb-48">
+    <div className="mt-5 mb-48">
       {(user != null && canLoad == true) ? (
         <div>
+          <div className="flex justify-center mb-10"><CallApi paramUserID={user.sub}/></div>
+
           <p className="text-2xl pb-12 text-center underline underline-offset-8">
         Resultados
       </p>
@@ -94,7 +97,7 @@ export default function Results() {
       {resultsContents.map((content) => {
         return (
           <div className="px-3">
-            <ResultsTab cardName={content.cardName} showedCategory={showedCategory} littleDown={content.littleDown} toggleVisibility={toggleVisibility}/>
+            <ResultsTab cardName={content.cardName} showedCategory={showedCategory} littleDown={content.littleDown} toggleVisibility={toggleVisibility} checkValue={0}/>
           </div>
         );
       })}
