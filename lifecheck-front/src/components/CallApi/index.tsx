@@ -57,45 +57,61 @@ const MyComponent: React.FC<CallAPI> = ({ paramUserID }) => {
     }
   }
 
+  const [progress, setProgress] = useState(0);
+
+  // TODOS LOS RESULTADOS
+  async function GenerarTodosLosResultados(event) {
+    event.preventDefault();
+    let categoryChangingID = 0;
+    while(categoryChangingID < 8)
+      {
+        categoryChangingID++;
+        setProgress((categoryChangingID/9) * 100);
+        try {
+          const res = await fetch('https://w7jjh178z8.execute-api.us-east-2.amazonaws.com/default/myGaboFunction', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            //body: '{"userIDkey": "2"}'
+            body: JSON.stringify({ userIDkey: paramUserID, categoryIDkey: categoryChangingID})
+          });
+    
+          const data = await res.json();
+          setResponse(JSON.stringify(data, null, 2));
+        } catch (error) {
+          console.error('Error:', error);
+          setResponse('Error: ' + error.message);
+        }
+      }
+      setProgress(100);
+  }
+
 
 
   return (
     <div>
-      {/*<div>
-        <button className="drop-shadow-xl w-28">
-          <div className="relative group transition-transform duration-200 ease-in-out transform hover:-translate-y-3">
-            <div className={"h-32 pt-3 rounded-lg transition-colors duration-200 bg-[#ffffff] group-hover:bg-[#72b5f4]"}>
-              <div className={"flex items-center justify-center rounded-full group-hover:text-white duration-200"}>
-              <SparklesIcon className="w-16 group-hover:text-white duration-200 text-[#72b5f4]"/>
-              </div>
-              <p className={"translate-y-0 text-center group-hover:text-white duration-200 font-semibold"}>
-                Generar Resultados
-              </p>
-            </div>
-          </div>
-        </button>
-    </div>*/}
-
     <div>
-    <button onClick={SubmitResponse} className="drop-shadow-lg group hover:scale-125 duration-200">
+    <button onClick={GenerarTodosLosResultados} className="drop-shadow-lg group hover:scale-125 duration-200">
                       <div className="flex justify-center items-center pt-3 group bg-white bg-opacity-75 px-2 rounded-full h-full overflow-hidden relative group-hover:bg-[#57bfd9] duration-200">
                       <p className="pb-4 pr-2 text-center font-bold group-hover:text-white transition duration 1000">Generar Resultados</p>
                         <SparklesIcon className="pb-4 w-7 text-[#57bfd9] group-hover:text-white transition duration 1000" />
                     </div>
                       </button>
+
+                      {/*<div className='bg-[#2e7c9b] rounded-full drop-shadow-lg'>
+                        <p className="text-3xl text-white font-bold text-center duration-200 mt-10">{progress}/9</p>
+                      </div>
+
+                      <progress value={0.5} className='rounded-full bg-slate-800'/>*/}
+                      
       </div>
 
-      {/*<div className='mt-10'>
-        <p className='text-center text-3xl font-bold text-[#57bfd9]'>{response}</p>
-  </div>
-
-  <div className='mt-10'>
-        <p className='text-center text-3xl font-bold text-[#57bfd9]'>{paramUserID}</p>
-  </div>*/}
+      
 
 
 
-      <form onSubmit={SubmitResponse}>
+      {/*<form onSubmit={SubmitResponse}>
 
 <label htmlFor="categoryIDkey">Category ID:   </label>
         <input
@@ -106,13 +122,18 @@ const MyComponent: React.FC<CallAPI> = ({ paramUserID }) => {
           onChange={(e) => setCategoryIDkey(Number(e.target.value))}
         /><br/>
 
-        {/*<button type="submit">Send Request</button>*/}
-      </form>
+      </form>*/}
+      
 
-      {/*<div>
-        <h2>Response:</h2>
-        <pre>{response}</pre>
-  </div>*/}
+
+      <div className="mt-10 flex flex-col items-center justify-center bg-[#e9e9e9] rounded-full drop-shadow-lg">
+      <div className="w-full h-7 rounded-full">
+        <div
+          className="bg-gradient-to-r from-[#2e5c64] to-[#52c0d3] h-full transition-all duration-500 rounded-full"
+          style={{ width: `${progress}%` }}
+        ></div>
+      </div>
+    </div>
     </div>
   );
 }
