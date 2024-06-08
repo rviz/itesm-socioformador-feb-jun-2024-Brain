@@ -32,6 +32,7 @@ export default function Results() {
   if(user === null && canLoad === true){redirect('/api/auth/login')}
 
   const [loading, setLoading] = useState(false);
+  const [showPB, setShowPB] = useState(false);
   const [error, setError] = useState(null);
   const [analysisGot, setAnlysisGot] = useState([]);
   const [showedCategory, setshowedCategory] = useState("General");
@@ -40,7 +41,16 @@ export default function Results() {
     setshowedCategory(cardName);
   };
 
-  const lastAnalysis = analysisGot.length > 0 ? analysisGot[analysisGot.length - 1] : null;
+  const ProgressBarShown = (canSHow: boolean) => {
+    setShowPB(canSHow);
+  };
+
+  let lastAnalysis = analysisGot.length > 0 ? analysisGot[analysisGot.length - 1] : null;
+
+  const VoidSetAnlysisGot = (myNewResults: []) => {
+    setAnlysisGot(myNewResults);
+    lastAnalysis = analysisGot.length > 0 ? analysisGot[analysisGot.length - 1] : null;
+  };
 
   useEffect(() => {
     const loadQuestions = async () => {
@@ -111,8 +121,12 @@ export default function Results() {
   return (
     <div className="mt-5 mb-48">
       {(user != null && canLoad == true) ? (
+        <div className="flex justify-center mb-10"><CallApi paramUserID={user.sub} ProgressBarShown={ProgressBarShown} showPB={showPB} VoidSetAnlysisGot={VoidSetAnlysisGot}/></div>
+      ) :
+      (<div/>)}
+      {(user != null && canLoad == true && showPB == false) ? (
         <div>
-          <div className="flex justify-center mb-10"><CallApi paramUserID={user.sub}/></div>
+          
 
           <p className="text-2xl pb-12 text-center underline underline-offset-8">
         Resultados
