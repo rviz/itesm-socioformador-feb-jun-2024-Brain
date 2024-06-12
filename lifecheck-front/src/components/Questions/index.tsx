@@ -82,11 +82,13 @@ const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion, quest
 
     const saveButton = () =>
       {
+        // Esta funcion pertenece a index.tsx
         answerAdder(question_id, savedTranscript);
         dbSavedAnswer = savedTranscript;
         CheckIfComplete();
         CheckIfComplete();
         setSavedAnswer(true);
+        // Quiero aquí que se haga el test
       };
 
     
