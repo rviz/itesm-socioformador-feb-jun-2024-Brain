@@ -106,9 +106,6 @@ export default function Evaluation() {
     {cardName: "Equilibrio trabajo-vida", littleDown: false, isComplete: 0},
   ]);
 
-
-
-
   const CheckIfComplete = async (categoryName) => {
     try {
       // GET DEL USUARIO
