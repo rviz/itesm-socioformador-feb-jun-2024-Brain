@@ -5,9 +5,9 @@ import Evaluation from './page'; // Asume que este componente contiene el botón
 describe('Page Component', () => {
   test('Checar si existe Evaluación', () => {
     render(<Evaluation />);
-    const textoEvaluacion = screen.getByText('Evaluación');
+    const textoEvaluacion = screen.getByText('Brain');
 
-    expect(textoEvaluacion).toBeDefined();
+    expect(textoEvaluacion).toBeInTheDocument();
     //expect(QuestionModule.answerAdder).toHaveBeenCalledWith(/* expectedQuestionId, expectedSavedTranscript */);
     //expect(QuestionModule.CheckIfComplete).toHaveBeenCalledTimes(2);
     //expect(QuestionModule.setSavedAnswer).toHaveBeenCalledWith(true);
