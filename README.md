@@ -28,6 +28,13 @@ We offer two different plans
 - Receive personalized feedback based on employee data.
 - Ability to register the organization's employees.
 
+### High level Diagram
+![Diagrama de alto nivel](https://github.com/rviz/itesm-socioformador-feb-jun-2024-Brain/assets/93287062/03185ce1-2ae7-4e61-87cd-12f038ead56d)
+
+
 ## License
+
+
+
 
 Pending
