@@ -6,7 +6,7 @@ import { Github } from "lucide-react";
 
 const Footer = () => (
   <footer className={cn("text-black text-center self-center items-center p-4")}>
-    <div className="container mx-auto">
+    <div className="container mx-auto mt-2">
       <p className="text-sm">© {new Date().getFullYear()} Brain.</p>
       <div className="mt-2 flex justify-center items-center">
         <Link href="/privacy" className="text-black hover:underline px-2">
