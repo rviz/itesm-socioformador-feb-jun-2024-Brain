@@ -28,6 +28,9 @@
       {
         "name": "next"
       }
+    ],
+    "types": [
+      "@types/jest"
     ]
   },
   "include": [
