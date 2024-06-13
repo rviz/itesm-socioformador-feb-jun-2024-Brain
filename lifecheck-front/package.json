@@ -10,7 +10,8 @@
     "db:generate": "drizzle-kit generate:pg --schema ./src/db/schema --out=./src/db/migrations",
     "db:migrate": "pnpm tsx src/db/migrate.ts",
     "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.5.0",
@@ -55,7 +56,11 @@
     "@types/node": "^20.12.7",
     "@types/pg": "^8.11.5",
     "@types/react": "18.2.79",
+    "allure-commandline": "^2.29.0",
+    "allure-cypress": "^3.0.0-beta.3",
+    "allure-jest": "^3.0.0-beta.3",
     "autoprefixer": "^10.0.1",
+    "cypress": "^13.11.0",
     "drizzle-kit": "^0.20.17",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
