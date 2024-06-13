@@ -26,7 +26,6 @@ interface EvaluationCard
 
 const MyComponent: React.FC<EvaluationCard> = ({ cardName, showedCategory, littleDown, toggleVisibility, checkValue }) => {
 
-
   // NOTA DE GABO: Porbablemente pienses que puedo poner un parámetro de color en el componente,
   // pero Tailwind por alguna razón no lo quiere agarrar, entonces tengo que utilizar variables locales
   // para que jale, entonces no trates de optimizar este código o si no, no jalará
@@ -64,21 +63,19 @@ if(cardName == showedCategory){paddleDown += " text-white";}
 
   return (
     <div>
-        
-
         <button onClick={() => toggleVisibility(cardName)} className="drop-shadow-xl w-28">
           <div className="relative group transition-transform duration-200 ease-in-out transform hover:-translate-y-3">
-            <div className={cardStyle}>
+            <div className={cardStyle} data-testid="card-style">
               <div className={"flex items-center justify-center rounded-full group-hover:text-white duration-200"}>
-              {cardName === "General" ? ( <ChartPieIcon className={iconStyle} />):
-              cardName === "Vivienda" ? ( <HomeIcon className={iconStyle} />):
-              cardName === "Satisfacción" ? (<FaceSmileIcon className={iconStyle}/>):
-              cardName === "Educación" ? (<AcademicCapIcon className={iconStyle} />):
-              cardName === "Medio ambiente" ? (<GlobeAmericasIcon className={iconStyle} />):
-              cardName === "Salud" ? (<HeartIcon className={iconStyle}/>):
-              cardName === "Ingresos" ? (<CurrencyDollarIcon className={iconStyle} />):
-              cardName === "Seguridad" ? (<ShieldCheckIcon className={iconStyle} />):
-              cardName === "Equilibrio trabajo-vida" ? (<ScaleIcon className={iconStyle} />):
+              {cardName === "General" ? ( <ChartPieIcon className={iconStyle} data-testid="ChartPieIcon"/>):
+              cardName === "Vivienda" ? ( <HomeIcon className={iconStyle} data-testid="HomeIcon"/>):
+              cardName === "Satisfacción" ? (<FaceSmileIcon className={iconStyle} data-testid="FaceSmileIcon"/>):
+              cardName === "Educación" ? (<AcademicCapIcon className={iconStyle} data-testid="AcademicCapIcon"/>):
+              cardName === "Medio ambiente" ? (<GlobeAmericasIcon className={iconStyle} data-testid="GlobeAmericasIcon"/>):
+              cardName === "Salud" ? (<HeartIcon className={iconStyle} data-testid="HeartIcon"/>):
+              cardName === "Ingresos" ? (<CurrencyDollarIcon className={iconStyle} data-testid="CurrencyDollarIcon"/>):
+              cardName === "Seguridad" ? (<ShieldCheckIcon className={iconStyle} data-testid="ShieldCheckIcon"/>):
+              cardName === "Equilibrio trabajo-vida" ? (<ScaleIcon className={iconStyle} data-testid="ScaleIcon"/>):
               (<div/>)}
               </div>
               <p className={paddleDown + " text-center group-hover:text-white duration-200 font-semibold"}>
@@ -87,14 +84,12 @@ if(cardName == showedCategory){paddleDown += " text-white";}
             </div>
             <div className="w-10 translate-x-20 -translate-y-36 drop-shadow-lg bg-white rounded-full">
           {(checkValue == 0) ? (<div/>):
-          (checkValue == 1)? (<QuestionMarkCircleIcon className="text-[#818181]"/>):
-          (checkValue == 2)? (<PlayCircleIcon className="text-[#e0ca4d]"/>):
-          (<CheckCircleIcon className="text-[#459a3b]"/>)}
+          (checkValue == 1)? (<QuestionMarkCircleIcon className="text-[#818181]" data-testid="QuestionMarkCircleIcon"/>):
+          (checkValue == 2)? (<PlayCircleIcon className="text-[#e0ca4d]" data-testid="PlayCircleIcon"/>):
+          (<CheckCircleIcon className="text-[#459a3b]" data-testid="CheckCircleIcon"/>)}
         </div>
           </div>
         </button>
-
-        
     </div>
   );
 }
