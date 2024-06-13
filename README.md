@@ -1,6 +1,28 @@
-# LifeCheck
+<p align="center">
+<img src="https://i.imgur.com/wyuL8zB.png" width="250">
+</p>
 
-Evaluation that helps improve life.
+<p align="center">Evaluation that helps improve life.</p>
+
+## Testing Usage
+#### To create tests in jest (unitary tests):
+<img src="https://i.imgur.com/8GHTpnU.png" width="150">
+
+#### To create tests in cypress:
+`npm run cypress:open`
+And create e2e tests inside of `/lifecheck-front/cypress/e2e/braintests`
+#### To run unitary tests
+`npm run test`
+
+#### To run cypress tests
+`npm run ui-allure-cypress`
+
+#### To open the generated testing report in Allure
+`report:allure`
+
+
+
+
 
 ## Table of Contents
 
