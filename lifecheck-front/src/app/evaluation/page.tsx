@@ -7,6 +7,7 @@ import { useState, useEffect, use } from "react";
 import {getSession} from '@auth0/nextjs-auth0'
 import { redirect } from "next/navigation";
 import { set } from "@auth0/nextjs-auth0/dist/session";
+import getUser from "@/src/services/user";
 
 export default function Evaluation() {
   const [user, setUser] = useState(null);
@@ -29,8 +30,7 @@ export default function Evaluation() {
     const loadUser = async () => {
       try {
         // GET DEL USUARIO
-        const responseUser = await fetch('/api/user');
-        const dataUser = await responseUser.json();
+        const dataUser = await getUser();
         setUser(dataUser.user);
         // GET DE LAS PREGUNTAS
         // Educación
