@@ -1,14 +1,7 @@
 "use client";
 import { useState } from "react";
-import Slider from "react-slick";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  HomeIcon,
-} from "@heroicons/react/24/solid";
+import { HomeIcon } from "@heroicons/react/24/solid";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import "../../css/style.css"; // Importa el CSS personalizado
 
 interface EvaluationCard {
@@ -17,79 +10,86 @@ interface EvaluationCard {
 }
 
 const formatFeedback = (feedback: string) => {
-  const lines = feedback.split(/(\d+\.\s+\*\*.+?\*\*:)/);
-  const title = lines.shift()?.trim();
-  const recommendations = [];
+  const recommendations = feedback.split(/(\d+\.\s+\*\*.+?\*\*:)/).slice(1); // Split feedback into parts and remove the first empty part
+  const parsedRecommendations = [];
 
-  for (let i = 0; i < lines.length; i += 2) {
-    const [number, subtitle] = lines[i].split(". **");
-    const body = lines[i + 1].trim();
-    recommendations.push({
-      number: number.trim(),
-      subtitle: subtitle.replace("**", "").replace("**", "").trim(),
-      body,
-    });
+  for (let i = 0; i < recommendations.length; i += 2) {
+    const numberSubtitle = recommendations[i].match(/\d+\.\s+\*\*(.+?)\*\*/);
+    const body = recommendations[i + 1].match(/#(.+?)#/);
+
+    if (numberSubtitle && body) {
+      parsedRecommendations.push({
+        number: numberSubtitle[0].split('.')[0].trim(),
+        subtitle: numberSubtitle[1].trim(),
+        body: body[1].trim(),
+      });
+    }
   }
 
-  return { title, recommendations };
+  return { title: "Recomendaciones", recommendations: parsedRecommendations };
 };
 
 const MyComponent: React.FC<EvaluationCard> = ({ cardName, feedback }) => {
   const { title, recommendations } = formatFeedback(feedback);
-  const [currentRecommendation, setCurrentRecommendation] = useState(0);
   const [flipped, setFlipped] = useState(
     Array(recommendations.length).fill(false)
   );
 
-  const handleNextRecommendation = () => {
-    setFlipped((prev) => {
-      const newFlipped = [...prev];
-      newFlipped[currentRecommendation] = false; // Resetea el estado de volteo de la tarjeta enfocada
-      return newFlipped;
-    });
-    setCurrentRecommendation((prev) => (prev + 1) % recommendations.length);
-  };
-
-  const handlePrevRecommendation = () => {
-    setFlipped((prev) => {
-      const newFlipped = [...prev];
-      newFlipped[currentRecommendation] = false; // Resetea el estado de volteo de la tarjeta enfocada
-      return newFlipped;
-    });
-    setCurrentRecommendation(
-      (prev) => (prev - 1 + recommendations.length) % recommendations.length
-    );
-  };
-
   const handleFlip = (index) => {
-    if (index === currentRecommendation) {
-      setFlipped((prev) => {
-        const newFlipped = [...prev];
-        newFlipped[index] = !newFlipped[index];
-        return newFlipped;
-      });
-    }
+    setFlipped((prev) => {
+      const newFlipped = [...prev];
+      newFlipped[index] = !newFlipped[index];
+      return newFlipped;
+    });
   };
 
   const handleMouseEnter = (index) => {
-    if (index === currentRecommendation) {
-      setFlipped((prev) => {
-        const newFlipped = [...prev];
-        newFlipped[index] = true;
-        return newFlipped;
-      });
-    }
+    setFlipped((prev) => {
+      const newFlipped = [...prev];
+      newFlipped[index] = true;
+      return newFlipped;
+    });
   };
 
   const handleMouseLeave = (index) => {
-    if (index === currentRecommendation) {
-      setFlipped((prev) => {
-        const newFlipped = [...prev];
-        newFlipped[index] = false;
-        return newFlipped;
-      });
-    }
+    setFlipped((prev) => {
+      const newFlipped = [...prev];
+      newFlipped[index] = false;
+      return newFlipped;
+    });
   };
+
+  let colorFront = "bg-[#000000]";
+  let colorBack = "text-[#00000]";
+
+if (cardName === 'General') {
+  colorFront = "text-[#8f8f8f]";
+  colorBack = "bg-[#a6a9a6]"; // Slightly darker gray pastel
+} else if (cardName === 'Vivienda') {
+  colorFront = "text-[#ff9239]";
+  colorBack = "bg-[#ffbf77]"; // Slightly darker orange pastel
+} else if (cardName === 'Satisfacción') {
+  colorFront = "text-[#487fff]";
+  colorBack = "bg-[#7faaff]"; // Slightly darker blue pastel
+} else if (cardName === 'Educación') {
+  colorFront = "text-[#fbbf24]";
+  colorBack = "bg-[#ffd966]"; // Slightly darker yellow pastel
+} else if (cardName === 'Medio ambiente') {
+  colorFront = "text-[#10b981]";
+  colorBack = "bg-[#66e6b3]"; // Slightly darker green pastel
+} else if (cardName === 'Salud') {
+  colorFront = "text-[#ef4444]";
+  colorBack = "bg-[#ff9999]"; // Slightly darker red pastel
+} else if (cardName === 'Ingresos') {
+  colorFront = "text-[#9333ea]";
+  colorBack = "bg-[#b399ff]"; // Slightly darker purple pastel
+} else if (cardName === 'Seguridad') {
+  colorFront = "text-[#50b6b6]";
+  colorBack = "bg-[#66cccc]"; // Slightly darker teal pastel
+} else if (cardName === 'Equilibrio trabajo-vida') {
+  colorFront = "text-[#f472b6]";
+  colorBack = "bg-[#ff99b3]"; // Slightly darker pink pastel
+}
 
   let circlesColors = ["bg-[#000000]", "bg-[#000000]", "bg-[#000000]"];
   if (cardName === "Vivienda") {
@@ -110,49 +110,14 @@ const MyComponent: React.FC<EvaluationCard> = ({ cardName, feedback }) => {
     circlesColors = ["bg-[#f580d283]", "bg-[#c080f583]", "bg-[#f580f583]"];
   }
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: "0px",
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    beforeChange: (current, next) => setCurrentRecommendation(next),
-  };
-
-  function SampleNextArrow(props) {
-    const { onClick } = props;
-    return (
-      <button
-        onClick={onClick}
-        className=" text-black-500 px-4 py-2 rounded-full absolute top-1/2 transform -translate-y-1/2 right-0 z-10"
-      >
-        <ChevronRightIcon className="h-8 w-8" />
-      </button>
-    );
-  }
-
-  function SamplePrevArrow(props) {
-    const { onClick } = props;
-    return (
-      <button
-        onClick={onClick}
-        className="text-black-500 px-4 py-2 rounded-full absolute top-1/2 transform -translate-y-1/2 left-0 z-10"
-      >
-        <ChevronLeftIcon className="h-8 w-8" />
-      </button>
-    );
-  }
-
   const calculateFontSize = (text) => {
     const maxLength = 300; // Aumenta la longitud máxima
     const baseSize = 16;
     const size = baseSize - Math.max(0, text.length - maxLength) / 10;
-    return Math.max(10, size); // Asegura un tamaño mínimo de fuente
+    return Math.max(14, size); // Asegura un tamaño mínimo de fuente
   };
+
+  
 
   return (
     <div>
@@ -179,41 +144,39 @@ const MyComponent: React.FC<EvaluationCard> = ({ cardName, feedback }) => {
         </div>
       </div>
       <div className="-mt-96 flex justify-center items-center">
-        <div className=" -m-10 shadow rounded w-10/12 relative bg-white px-40 h-[800px]">
+        <div className=" -m-10 shadow border rounded w-full relative bg-white px-20 h-full">
           <div className="px-4 pt-5 pb-5 rounded-3xl overflow-hidden">
             <h2 className="text-3xl pb-10 text-neutral-950 bg-white rounded-lg text-center duration-200">
               {title}
             </h2>
             {recommendations.length > 0 && (
-              <Slider {...settings}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-40 mb-40">
                 {recommendations.map((recommendation, index) => (
                   <div
                     key={index}
-                    className={`carousel-item ${
-                      index === currentRecommendation
+                    className={`carousel-item${
+                      index === recommendation
                         ? "carousel-item-focus"
                         : "carousel-item-blur"
-                    } rounded-lg flex flex-col items-center justify-center my-20`}
+                    } rounded-lg flex flex-col items-center justify-center my-24 -mb-10`}
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={() => handleMouseLeave(index)}
                   >
-                    <div
+                    <div /*Aqui se mapea el card individual*/
                       className={`flip-card ${flipped[index] ? "flipped" : ""}`}
                     >
                       <div className="flip-card-inner">
-                        <div className="flip-card-front bg-white rounded-lg shadow-lg flex flex-col items-center justify-center">
-                          <h3 className="text-2xl pb-1 mt-4">
+                        <div className={`flip-card-front ${colorFront} border border-grey-150 px-4 rounded-lg shadow-xl flex flex-col items-center justify-center`}>
+                          <h3 className="text-6xl pb-1 mt-4">
                             {recommendation.number}
                           </h3>
-                          <HomeIcon className="h-30 w-30 text-orange-500" />{" "}
-                          {/* Aquí agregamos el icono */}
-                          <h4 className="recommendation-title text-xl font-bold p-4 mt-4">
+                          <h4 className="recommendation-title text-xl font-semibold p-4 mt-4">
                             {recommendation.subtitle}
                           </h4>
                         </div>
-                        <div className="flip-card-back bg-gray-50 rounded-lg shadow-lg flex flex-col items-center justify-center">
+                        <div className={`flip-card-back ${colorBack} text-white font-bold p-4 rounded-lg shadow-lg flex flex-col items-center justify-center`}>
                           <p
-                            className="text-lg text-center p-4"
+                            className="text-xl text-center p-4"
                             style={{
                               fontSize: calculateFontSize(recommendation.body),
                             }}
@@ -225,7 +188,7 @@ const MyComponent: React.FC<EvaluationCard> = ({ cardName, feedback }) => {
                     </div>
                   </div>
                 ))}
-              </Slider>
+              </div>
             )}
           </div>
         </div>
