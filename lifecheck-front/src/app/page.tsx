@@ -17,7 +17,7 @@ export default function Home() {
       <div className="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 -mt-[225px]">
         <Link
           href="/evaluation"
-          className="bg-white text-black shadow font-semibold py-4 px-6 rounded-lg hover:bg-[#1e8d74] hover:text-white transition duration-300"
+          className="bg-white text-black shadow-2xl font-semibold py-4 px-6 rounded-lg hover:bg-[#1e8d74] hover:text-white transition duration-300"
         >
           Realiza tu encuesta!
         </Link>
