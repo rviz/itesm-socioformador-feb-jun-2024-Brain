@@ -14,51 +14,8 @@ interface CallAPI
 }
 
 const MyComponent: React.FC<CallAPI> = ({ paramUserID, ProgressBarShown, showPB, VoidSetAnlysisGot }) => {
-  const [categoryIDkey, setCategoryIDkey] = useState(0);
   const [response, setResponse] = useState('');
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    try {
-      const gabo = 'https://w7jjh178z8.execute-api.us-east-2.amazonaws.com/default/myGaboFunction';
-      const rodri = 'https://92ak4s8rqi.execute-api.us-east-2.amazonaws.com/default/freakyscript';
-      const res = await fetch(gabo, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ paramUserID, categoryIDkey})
-      });
-
-      const data = await res.json();
-      setResponse(JSON.stringify(data, null, 2));
-    } catch (error) {
-      console.error('Error:', error);
-      setResponse('Error: ' + error.message);
-    }
-  }
-
-  async function SubmitResponse(event) {
-    event.preventDefault();
-    try {
-      const gabo = 'https://w7jjh178z8.execute-api.us-east-2.amazonaws.com/default/myGaboFunction';
-      const rodri = 'https://92ak4s8rqi.execute-api.us-east-2.amazonaws.com/default/freakyscript';
-      const res = await fetch(gabo, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        //body: '{"userIDkey": "2"}'
-        body: JSON.stringify({ userIDkey: paramUserID, categoryIDkey: categoryIDkey})
-      });
-
-      const data = await res.json();
-      setResponse(JSON.stringify(data, null, 2));
-    } catch (error) {
-      console.error('Error:', error);
-      setResponse('Error: ' + error.message);
-    }
-  }
 
   const [progress, setProgress] = useState(0);
 
