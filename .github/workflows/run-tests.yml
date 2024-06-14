@@ -21,16 +21,19 @@ jobs:
         with:
           node-version: 20
 
-      - name: Unset PNPM environment variables
-        run: |
-          unset PNPM_HOME
-          unset NPM_CONFIG_LOCK
-
       - name: Install dependencies
         run: npm install
         env:
           NPM_CONFIG_LOCK: false
 
+      - name: Ensure pnpm is not installed
+        run: npm uninstall -g pnpm || true
+
+      - name: Unset PNPM environment variables
+        run: |
+          unset PNPM_HOME
+          unset NPM_CONFIG_LOCK
+          
       - name: Run jest
         run: npm run test
 
@@ -43,6 +46,8 @@ jobs:
           record: false
           publish-summary: true
           component: false
+        env:
+          NPM_CONFIG_LOCK: false
 
      
 
