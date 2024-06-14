@@ -8,6 +8,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./lifecheck-front
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
