@@ -33,6 +33,9 @@ jobs:
       - name: Run jest
         run: npm run test
 
+      - name: Unset PNPM_HOME
+        run: unset PNPM_HOME
+
       - uses: cypress-io/github-action@v6
         with:
           build: npm run build
