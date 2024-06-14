@@ -93,7 +93,7 @@ const MyComponent: React.FC<QuestionComponent> = ({ pregunta, descripcion, quest
 
     
       if (!browserSupportsSpeechRecognition) {
-        return <span>Browser doesn't support speech recognition.</span>;
+        return <span>Browser does not support speech recognition.</span>;
       }
     
       // Inicia la escucha y actualiza el estado

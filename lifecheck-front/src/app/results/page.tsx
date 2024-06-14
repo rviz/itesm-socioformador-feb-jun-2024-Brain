@@ -135,7 +135,7 @@ export default function Results() {
       <div className="flex justify-center mb-20">
       {resultsContents.map((content) => {
         return (
-          <div className="px-3">
+          <div key={content.cardName} className="px-3">
             <ResultsTab cardName={content.cardName} showedCategory={showedCategory} littleDown={content.littleDown} toggleVisibility={toggleVisibility} checkValue={0}/>
           </div>
         );
