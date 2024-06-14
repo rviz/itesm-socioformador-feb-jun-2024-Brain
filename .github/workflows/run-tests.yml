@@ -25,29 +25,21 @@ jobs:
         run: npm install
         env:
           NPM_CONFIG_LOCK: false
-
-      - name: Ensure pnpm is not installed
-        run: npm uninstall -g pnpm || true
-
-      - name: Unset PNPM environment variables
-        run: |
-          unset PNPM_HOME
-          unset NPM_CONFIG_LOCK
           
       - name: Run jest
         run: npm run test
 
+      - name: Build the application
+        run: npm run build
+
+      - name: Start the application
+        run: npm start &
+
+      - name: Wait for the server to be up
+        run: npx wait-on http://localhost:3000
+
       - name: Run Cypress tests
-        uses: cypress-io/github-action@v6
-        with:
-          build: npm run build
-          start: npm start
-          working-directory: lifecheck-front
-          record: false
-          publish-summary: true
-          component: false
-        env:
-          NPM_CONFIG_LOCK: false
+        run: npx cypress run
 
      
 
