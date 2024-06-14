@@ -202,7 +202,7 @@ const voidComplete = (isComplete, fromCategory) => {
 <div className="flex justify-center mb-0">
       {resultsContents.map((content) => {
         return (
-          <div className="px-3">
+          <div key={content.cardName} className="px-3">
             <EvaluationCard cardName={content.cardName} showedCategory={showedCategory} littleDown={content.littleDown} toggleVisibility={toggleVisibility} checkValue={content.isComplete}/>
           </div>
           // Recreate previous div, and make sure to add the checkValue as the isCompleteValue from results content based on the cardName
