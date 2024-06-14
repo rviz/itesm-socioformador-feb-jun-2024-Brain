@@ -21,26 +21,28 @@ jobs:
         with:
           node-version: 20
 
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          version: 9.1.1
-          run_install: false
+      - name: Unset PNPM environment variables
+        run: |
+          unset PNPM_HOME
+          unset NPM_CONFIG_LOCK
 
       - name: Install dependencies
-        run: npm i
+        run: npm install
+        env:
+          NPM_CONFIG_LOCK: false
 
       - name: Run jest
         run: npm run test
 
-      - name: Unset PNPM_HOME
-        run: unset PNPM_HOME
-
-      - uses: cypress-io/github-action@v6
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
         with:
           build: npm run build
           start: npm start
           working-directory: lifecheck-front
+          record: false
+          publish-summary: true
+          component: false
 
      
 
