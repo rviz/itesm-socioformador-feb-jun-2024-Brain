@@ -21,6 +21,12 @@ jobs:
         with:
           node-version: 20
 
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9.1.1
+          run_install: false
+
       - name: Install dependencies
         run: npm i
 
