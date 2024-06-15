@@ -1,4 +1,4 @@
-name: Running tests
+name: Running tests and linting
 
 on:
   push:
@@ -6,12 +6,33 @@ on:
     types: [opened, reopened]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./lifecheck-front
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+          
+      - name: Run linter
+        run: npm run lint
+
   test:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./lifecheck-front
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,3 +47,5 @@ jobs:
           
       - name: Run jest
         run: npm run test
+
+  
