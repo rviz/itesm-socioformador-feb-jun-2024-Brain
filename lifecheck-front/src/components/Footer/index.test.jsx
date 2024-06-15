@@ -24,8 +24,6 @@ describe('Footer Component', () => {
     expect(termsLink.closest('a')).toHaveAttribute('href', '/terms');
   });
 
-  
-
   test('should have appropriate class names for styling part 1', () => {
     render(<Footer />);
     const footerElement = screen.getByRole('contentinfo');
