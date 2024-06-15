@@ -9,8 +9,6 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import Question from '../Questions';
 import { Check, Circle } from "lucide-react";
 
-
-
 async function addQuestionTest(qText, qType, categoryId, createdBy) {
   // Suponiendo que tienes configurada una API en `/api/addQuestion`
   const response = await fetch('/api/questions', {

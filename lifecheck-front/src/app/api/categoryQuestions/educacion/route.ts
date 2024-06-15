@@ -1,13 +1,10 @@
-import { NextResponse } from 'next/server';
-import { getEvaluationQuestions } from '@/src/data/questions';
-
-
+import { NextResponse } from "next/server";
+import { getEvaluationQuestions } from "@/src/data/questions";
 
 export async function GET() {
-  const questions = await getEvaluationQuestions(4);
-  return NextResponse.json({ questions });
+	const questions = await getEvaluationQuestions(4);
+	return NextResponse.json({ questions });
 }
-
 
 // AGREGAR PREGUNTAS - NO BORRAR EL COMENATIO GIGANTE DE ABAJO
 /*
