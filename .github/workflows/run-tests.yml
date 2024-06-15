@@ -50,6 +50,9 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./lifecheck-front
     needs: [test, lint]
     steps:
       - name: Checkout
