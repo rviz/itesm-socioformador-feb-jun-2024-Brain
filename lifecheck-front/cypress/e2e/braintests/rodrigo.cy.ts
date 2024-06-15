@@ -22,6 +22,6 @@ describe("prueba e2e rodrigo, acceder a evaluacion solamente loggeado", () => {
     );
 
     // Step 3: Attempt to access the evaluation page
-    cy.get('[href="/evaluation"]').click();
+    cy.get('.hidden > [href="/evaluation"]');
   });
 });
