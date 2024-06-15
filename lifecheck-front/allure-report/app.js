@@ -23719,11 +23719,9 @@
                       u > 1 && pt(p),
                       u > 1 &&
                         ht(
-                          t
-                            .slice(0, u - 1)
-                            .concat({
-                              value: " " === t[u - 2].type ? "*" : "",
-                            }),
+                          t.slice(0, u - 1).concat({
+                            value: " " === t[u - 2].type ? "*" : "",
+                          }),
                         ).replace(R, "$1"),
                       o,
                       u < i && gt(t.slice(u, i)),
