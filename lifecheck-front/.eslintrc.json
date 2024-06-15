@@ -10,13 +10,11 @@
       "error",
       {
         "semi": true,
-        "singleQuote": false,
-        "useTabs": false, // Cambiado a false para usar espacios
-        "tabWidth": 2, // Asegúrate de que el ancho del tab está alineado
+        "tabWidth": 2, // Adjust tab width as needed
         "bracketSpacing": true,
-        "trailingComma": "es5",
+        "trailingComma": "all",
         "printWidth": 80,
-        "arrowParens": "avoid"
+        "arrowParens": "always"
       }
     ],
     "semi": ["error", "always"]
