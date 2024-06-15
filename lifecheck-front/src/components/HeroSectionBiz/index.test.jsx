@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
-import HeroSectionBiz from './index'; // Asume que este componente contiene el botón save
+import HeroSectionBiz from './index'; 
 
 // PRUEBAS HECHAS POR FAUSTO - A01412004
 describe('Index Component', () => {

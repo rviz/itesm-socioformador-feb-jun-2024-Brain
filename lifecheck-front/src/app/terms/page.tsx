@@ -20,7 +20,7 @@ export default function Page() {
             Términos y Condiciones{" "}
           </h2>
           <div className="flex justify-center items-center">
-            <AcademicCapIcon className="h-32 w-32 text-yellow-400 p-4 hover:text-white transition duration-200" />
+            <AcademicCapIcon className="h-32 w-32 text-yellow-400 p-4 hover:text-white transition duration-200" data-testid="academic-icon" />
           </div>
         </div>
       </div>
