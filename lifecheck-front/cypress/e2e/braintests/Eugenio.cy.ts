@@ -1,4 +1,4 @@
-describe('prueba e2e rodrigo, acceder a evaluacion solamente loggeado', () => {
+describe('prueba e2e Eugenio, acceder a Empresa solamente loggeado', () => {
   beforeEach(() => {
     // Ignore specific uncaught exceptions from the application
     cy.on('uncaught:exception', (err, runnable) => {
